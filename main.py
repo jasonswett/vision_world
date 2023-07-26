@@ -16,17 +16,16 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            johnny.move(-1, 0)
-        if keys[pygame.K_RIGHT]:
-            johnny.move(1, 0)
-        if keys[pygame.K_UP]:
-            johnny.move(0, -1)
-        if keys[pygame.K_DOWN]:
-            johnny.move(0, 1)
-            
+            elif event.type == pygame.KEYDOWN:  # check for KEYDOWN events
+                if event.key == pygame.K_LEFT:
+                    johnny.move(-1, 0)
+                elif event.key == pygame.K_RIGHT:
+                    johnny.move(1, 0)
+                elif event.key == pygame.K_UP:
+                    johnny.move(0, -1)
+                elif event.key == pygame.K_DOWN:
+                    johnny.move(0, 1)
+
         cell_screen.clear()
         cell_screen.draw_cell(johnny)
         pygame.display.update()
