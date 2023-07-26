@@ -1,4 +1,4 @@
-import pygame
+import pygame, random
 from cell_screen import CellScreen
 from cell import Cell
 
@@ -8,7 +8,8 @@ def main():
     pygame.init()
     cell_screen = CellScreen(SCREEN_WIDTH, SCREEN_HEIGHT)
 
-    johnny = Cell(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, (255, 0, 0))
+    other_cells = random_cells(cell_screen, 50)
+    johnny = Cell(cell_screen.random_x(), cell_screen.random_y(), (255, 0, 0))
     clock = pygame.time.Clock()
 
     running = True
@@ -27,10 +28,24 @@ def main():
                     johnny.move(0, 1)
 
         cell_screen.clear()
+
+        for cell in other_cells:
+            cell_screen.draw_cell(cell)
+
         cell_screen.draw_cell(johnny)
         pygame.display.update()
         clock.tick(60)
 
     pygame.quit()
+
+def random_cells(cell_screen, num_cells):
+    cells = []
+    for _ in range(num_cells):
+        x = cell_screen.random_x()
+        y = cell_screen.random_y()
+        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))  # RGB
+        cell = Cell(x, y, color)
+        cells.append(cell)
+    return cells
 
 main()
