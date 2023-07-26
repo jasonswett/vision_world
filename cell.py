@@ -21,3 +21,7 @@ class Cell:
         if x_distance == 0 and y_distance == 0:
             return False
         return x_distance <= 1 and y_distance <= 1
+
+    def move(self, dx, dy):
+            self.x += dx
+            self.y += dy
