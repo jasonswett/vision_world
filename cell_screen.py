@@ -6,7 +6,6 @@ CELL_WIDTH = INNER_CELL_WIDTH + 2
 class CellScreen:
     def __init__(self, width, height):
         self.organisms = []
-        self.food_cells = []
 
         self.width = width
         self.height = height
@@ -22,10 +21,6 @@ class CellScreen:
         x_position = cell.x * CELL_WIDTH
         y_position = cell.y * CELL_WIDTH
         pygame.draw.rect(self.display, cell.color, (x_position, y_position, INNER_CELL_WIDTH, INNER_CELL_WIDTH), 0)
-
-    def draw_organism(self, organism):
-        for cell in organism.cells:
-            self.draw_cell(cell)
 
     def random_x(self):
         return random.randint(0, self.width - 1)
@@ -49,16 +44,6 @@ class CellScreen:
         else:
             return y
 
-    def draw_organisms(self):
-        for organism in self.organisms:
-            self.draw_organism(organism)
-        pygame.display.update()
-
-    def remove_organism(self, organism):
-        for i, self_organism in enumerate(self.organisms):
-            if self_organism == organism:
-                del self.organisms[i]
-
     def space_available(self, cell):
         if cell.y < 0:
             return False
@@ -74,32 +59,3 @@ class CellScreen:
                 return False
 
         return True
-
-    def other_cells(self):
-        cells = []
-
-        for organism in self.organisms:
-            for cell in organism.cells:
-                cells.append(cell)
-
-        for cell in self.food_cells:
-            cells.append(cell)
-
-        return cells
-
-    def food_cell_at(self, position):
-        x = position[0]
-        y = position[1]
-
-        for food_cell in self.food_cells:
-            if food_cell.x == x and food_cell.y == y:
-                return food_cell
-        return None
-
-    def adjacent_organism(self, organism):
-        for other_organism in self.organisms:
-            for other_cell in other_organism.cells:
-                for cell in organism.cells:
-                    if other_cell.adjacent_to(cell) and organism != other_organism:
-                        return other_organism
-        return None
