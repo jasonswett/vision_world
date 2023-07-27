@@ -12,7 +12,7 @@ def main():
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
     food_cells = random_cells(cell_screen, 50)
-    johnny = Organism(cell_screen.random_x(), cell_screen.random_y())
+    organisms = random_organisms(cell_screen, 10)
     clock = pygame.time.Clock()
 
     counter = 0
@@ -24,19 +24,27 @@ def main():
 
         counter += 1
         if counter % 10 == 0:
-            johnny.move(food_cells)
+            for organism in organisms:
+                organism.move(food_cells)
 
         cell_screen.clear()
 
         for cell in food_cells:
             cell_screen.draw_cell(cell)
 
-        cell_screen.draw_organism(johnny)
+        for organism in organisms:
+            cell_screen.draw_organism(organism)
 
         pygame.display.update()
         clock.tick(60)
 
     pygame.quit()
+
+def random_organisms(cell_screen, count):
+    organisms = []
+    for _ in range(count):
+        organisms.append(Organism(cell_screen.random_x(), cell_screen.random_y()))
+    return organisms
 
 def random_cells(cell_screen, num_cells):
     cells = []
