@@ -5,9 +5,9 @@ from cell_screen import CellScreen
 from cell import Cell
 from organism import Organism
 
-GENERATION_SIZE = 30
+GENERATION_SIZE = 50
 SCREEN_WIDTH_IN_CELLS = 140
-FOOD_COUNT = 300
+FOOD_COUNT = 100
 
 def main():
     SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
