@@ -10,9 +10,6 @@ class CellScreen:
         self.height = height
         self.surface = pygame.display.set_mode((self.width_in_pixels(), self.height_in_pixels()), 0, 32)
 
-    def surface(self):
-        return self.surface
-
     def width_in_pixels(self):
         return CELL_WIDTH * self.width
 

@@ -36,7 +36,7 @@ def main():
             cell_screen.draw_cell(cell)
 
         cell_screen.draw_cell(johnny)
-        SmallScreen(cell_screen).draw()
+        SmallScreen(cell_screen.surface, cell_screen.width_in_pixels(), cell_screen.height_in_pixels()).draw()
 
         pygame.display.update()
         clock.tick(60)
