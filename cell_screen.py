@@ -12,15 +12,15 @@ class CellScreen:
 
         width_in_pixels = CELL_WIDTH * width
         height_in_pixels = CELL_WIDTH * height
-        self.display = pygame.display.set_mode((width_in_pixels, height_in_pixels), 0, 32)
+        self.surface = pygame.display.set_mode((width_in_pixels, height_in_pixels), 0, 32)
 
     def clear(self):
-        self.display.fill((0, 0, 0))
+        self.surface.fill((0, 0, 0))
 
     def draw_cell(self, cell):
         x_position = cell.x * CELL_WIDTH
         y_position = cell.y * CELL_WIDTH
-        pygame.draw.rect(self.display, cell.color, (x_position, y_position, INNER_CELL_WIDTH, INNER_CELL_WIDTH), 0)
+        pygame.draw.rect(self.surface, cell.color, (x_position, y_position, INNER_CELL_WIDTH, INNER_CELL_WIDTH), 0)
 
     def random_x(self):
         return random.randint(0, self.width - 1)

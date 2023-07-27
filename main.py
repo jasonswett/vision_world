@@ -3,10 +3,10 @@ from cell_screen import CellScreen
 from cell import Cell
 
 def main():
-    SCREEN_WIDTH = 100
-    SCREEN_HEIGHT = int(SCREEN_WIDTH * 0.618)
+    SCREEN_WIDTH_IN_CELLS = 100
+    SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
     pygame.init()
-    cell_screen = CellScreen(SCREEN_WIDTH, SCREEN_HEIGHT)
+    cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
     other_cells = random_cells(cell_screen, 50)
     johnny = Cell(cell_screen.random_x(), cell_screen.random_y(), (255, 0, 0))
