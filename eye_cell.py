@@ -32,3 +32,15 @@ class EyeCell(Cell):
                 if cell.y == self.y and cell.x == x:
                     return cell
         return None
+
+    def digest(self, cells):
+        total = 0
+        if self.nearest_cell_vertical(cells, direction=-1):
+            total += 1
+        if self.nearest_cell_horizontal(cells, direction=1):
+            total += 2
+        if self.nearest_cell_vertical(cells, direction=1):
+            total += 3
+        if self.nearest_cell_horizontal(cells, direction=-1):
+            total += 4
+        return total
