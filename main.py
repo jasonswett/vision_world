@@ -1,6 +1,8 @@
 import pygame, random
+
 from cell_screen import CellScreen
 from cell import Cell
+from eye_cell import EyeCell
 from small_screen import SmallScreen
 
 def main():
@@ -10,7 +12,7 @@ def main():
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
     other_cells = random_cells(cell_screen, 50)
-    johnny = Cell(cell_screen.random_x(), cell_screen.random_y(), (255, 0, 0))
+    johnny = EyeCell(cell_screen.random_x(), cell_screen.random_y(), (255, 0, 0))
     clock = pygame.time.Clock()
 
     running = True
