@@ -1,13 +1,13 @@
-import random
+import random, copy
 from eye_cell import EyeCell
 from genome import Genome
 from move import Move
 
 class Organism:
     def __init__(self, x, y, genome=Genome()):
-        self.genome = genome
-        if random.random() < 0.01:
-            genome.mutate()
+        self.genome = copy.deepcopy(genome)
+        if random.random() < 0.1:
+            self.genome.mutate()
 
         self.health = 20
         self.eye_cell = EyeCell(x, y, self.genome.color())
