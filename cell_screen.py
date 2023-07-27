@@ -6,13 +6,18 @@ CELL_WIDTH = INNER_CELL_WIDTH + 2
 class CellScreen:
     def __init__(self, width, height):
         self.organisms = []
-
         self.width = width
         self.height = height
+        self.surface = pygame.display.set_mode((self.width_in_pixels(), self.height_in_pixels()), 0, 32)
 
-        width_in_pixels = CELL_WIDTH * width
-        height_in_pixels = CELL_WIDTH * height
-        self.surface = pygame.display.set_mode((width_in_pixels, height_in_pixels), 0, 32)
+    def surface(self):
+        return self.surface
+
+    def width_in_pixels(self):
+        return CELL_WIDTH * self.width
+
+    def height_in_pixels(self):
+        return CELL_WIDTH * self.height
 
     def clear(self):
         self.surface.fill((0, 0, 0))
