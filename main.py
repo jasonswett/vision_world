@@ -11,7 +11,7 @@ def main():
     pygame.init()
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
-    food_cells = random_cells(cell_screen, 50)
+    food_cells = random_food_cells(cell_screen, 50)
     organisms = random_organisms(cell_screen, 10)
     clock = pygame.time.Clock()
 
@@ -46,7 +46,7 @@ def random_organisms(cell_screen, count):
         organisms.append(Organism(cell_screen.random_x(), cell_screen.random_y()))
     return organisms
 
-def random_cells(cell_screen, num_cells):
+def random_food_cells(cell_screen, num_cells):
     cells = []
     for _ in range(num_cells):
         x = cell_screen.random_x()
