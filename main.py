@@ -66,8 +66,7 @@ def random_cells(cell_screen, num_cells):
     for _ in range(num_cells):
         x = cell_screen.random_x()
         y = cell_screen.random_y()
-        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))  # RGB
-        cell = Cell(x, y, color)
+        cell = Cell(x, y, (0, 255, 0))
         cells.append(cell)
     return cells
 
