@@ -11,8 +11,8 @@ def main():
     pygame.init()
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
-    food_cells = random_food_cells(cell_screen, 300)
-    organisms = random_organisms(cell_screen, 50)
+    food_cells = random_food_cells(cell_screen, 100)
+    organisms = random_organisms(cell_screen, 30)
     clock = pygame.time.Clock()
 
     counter = 0
@@ -25,7 +25,7 @@ def main():
         counter += 1
         if counter % 10 == 0:
             for organism in organisms:
-                food_cell_eaten = organism.move(food_cells)
+                food_cell_eaten = organism.move(cell_screen.width, cell_screen.height, food_cells)
                 if food_cell_eaten:
                     organism.health += 1
                     food_cells.remove(food_cell_eaten)

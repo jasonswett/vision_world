@@ -9,11 +9,12 @@ class Organism:
         self.cells = [self.eye_cell]
         self.genome = Genome()
 
-    def move(self, food_cells):
+    def move(self, bounds_width, bounds_height, food_cells):
         digest = self.eye_cell.digest(food_cells)
-        dx, dy = Move().tuple(self.genome.direction(digest))
         for cell in self.cells:
-            cell.move(dx, dy)
+            move = Move(cell.coordinates(), bounds_width, bounds_height)
+            coordinates = move.coordinates(self.genome.direction(digest))
+            cell.move_to(coordinates)
         for cell in self.cells:
             for food_cell in food_cells:
                 if food_cell.x == cell.x and food_cell.y == cell.y:

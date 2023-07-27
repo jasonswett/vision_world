@@ -34,22 +34,6 @@ class CellScreen:
     def random_y(self):
         return random.randint(0, self.height - 1)
 
-    def wrapped_x(self, x):
-        if x >= self.width:
-            return x - self.width
-        elif x < 0:
-            return x + self.width
-        else:
-            return x
-
-    def wrapped_y(self, y):
-        if y >= self.height:
-            return y - self.height
-        elif y < 0:
-            return y + self.height
-        else:
-            return y
-
     def space_available(self, cell):
         if cell.y < 0:
             return False

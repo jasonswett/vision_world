@@ -4,6 +4,9 @@ class Cell:
         self.y = y
         self.color = color
 
-    def move(self, dx, dy):
-        self.x += dx
-        self.y += dy
+    def move_to(self, coordinates):
+        self.x = coordinates[0]
+        self.y = coordinates[1]
+
+    def coordinates(self):
+        return (self.x, self.y)
