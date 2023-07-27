@@ -28,6 +28,18 @@ class SmallScreen:
                  SIZE,
                  SIZE))
 
+    def draw_indicator(self, color):
+        if color is None:
+            color = BLACK
+
+        pygame.draw.rect(
+                self.surface,
+                color,
+                (self.left_edge_x() - SIZE,
+                 self.top_edge_y() - SIZE,
+                 SIZE,
+                 SIZE))
+
     def left_edge_x(self):
         return self.container_width
 
