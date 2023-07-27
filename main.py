@@ -40,6 +40,8 @@ def main():
         small_screen.draw()
         small_screen.draw_indicator(johnny.north_color(other_cells), 1, 0)
         small_screen.draw_indicator(johnny.south_color(other_cells), 1, 2)
+        small_screen.draw_indicator(johnny.east_color(other_cells), 0, 1)
+        small_screen.draw_indicator(johnny.west_color(other_cells), 2, 1)
 
         pygame.display.update()
         clock.tick(60)
