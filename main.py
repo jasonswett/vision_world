@@ -12,7 +12,7 @@ def main():
     pygame.init()
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
-    other_cells = random_cells(cell_screen, 50)
+    food_cells = random_cells(cell_screen, 50)
     johnny = Organism(cell_screen.random_x(), cell_screen.random_y())
     clock = pygame.time.Clock()
 
@@ -23,38 +23,27 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        keys = pygame.key.get_pressed()
-        move = Move()
-
         counter += 1
-        if counter % 4 == 0:
-            if keys[pygame.K_UP]:
-                johnny.move(*move.tuple("up"))
-            if keys[pygame.K_DOWN]:
-                johnny.move(*move.tuple("down"))
-            if keys[pygame.K_LEFT]:
-                johnny.move(*move.tuple("left"))
-            if keys[pygame.K_RIGHT]:
-                johnny.move(*move.tuple("right"))
+        if counter % 10 == 0:
+            johnny.move(food_cells)
 
         cell_screen.clear()
 
-        for cell in other_cells:
+        for cell in food_cells:
             cell_screen.draw_cell(cell)
 
         cell_screen.draw_organism(johnny)
         small_screen = SmallScreen(cell_screen.surface, cell_screen.width_in_pixels(), cell_screen.height_in_pixels())
         small_screen.draw()
-        small_screen.draw_indicator(johnny.cells[0].north_color(other_cells), 1, 0)
-        small_screen.draw_indicator(johnny.cells[0].south_color(other_cells), 1, 2)
-        small_screen.draw_indicator(johnny.cells[0].east_color(other_cells), 2, 1)
-        small_screen.draw_indicator(johnny.cells[0].west_color(other_cells), 0, 1)
+        small_screen.draw_indicator(johnny.cells[0].north_color(food_cells), 1, 0)
+        small_screen.draw_indicator(johnny.cells[0].south_color(food_cells), 1, 2)
+        small_screen.draw_indicator(johnny.cells[0].east_color(food_cells), 2, 1)
+        small_screen.draw_indicator(johnny.cells[0].west_color(food_cells), 0, 1)
 
         pygame.display.update()
         clock.tick(60)
 
     pygame.quit()
-
 
 def random_cells(cell_screen, num_cells):
     cells = []
