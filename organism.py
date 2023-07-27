@@ -4,6 +4,7 @@ from move import Move
 
 class Organism:
     def __init__(self, x, y):
+        self.health = 10
         self.eye_cell = EyeCell(x, y, (255, 0, 0))
         self.cells = [self.eye_cell]
         self.genome = Genome()
@@ -14,3 +15,6 @@ class Organism:
         dx, dy = Move().tuple(move)
         for cell in self.cells:
             cell.move(dx, dy)
+
+    def age(self):
+        self.health -= 1

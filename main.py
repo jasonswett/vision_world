@@ -27,6 +27,12 @@ def main():
             for organism in organisms:
                 organism.move(food_cells)
 
+        if counter % 30 == 0:
+            for organism in organisms:
+                organism.age()
+                if organism.health == 0:
+                    organisms.remove(organism)
+
         cell_screen.clear()
 
         for cell in food_cells:
