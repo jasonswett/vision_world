@@ -27,7 +27,7 @@ def main():
             for organism in organisms:
                 organism.move(food_cells)
 
-        if counter % 30 == 0:
+        if counter % 50 == 0:
             for organism in organisms.copy():
                 organism.age()
                 if organism.health == 0:
