@@ -19,6 +19,10 @@ class CellScreen:
     def clear(self):
         self.surface.fill((0, 0, 0))
 
+    def draw_organism(self, organism):
+        for cell in organism.cells:
+            self.draw_cell(cell)
+
     def draw_cell(self, cell):
         x_position = cell.x * CELL_WIDTH
         y_position = cell.y * CELL_WIDTH

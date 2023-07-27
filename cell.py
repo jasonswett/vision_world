@@ -5,5 +5,5 @@ class Cell:
         self.color = color
 
     def move(self, dx, dy):
-            self.x += dx
-            self.y += dy
+        self.x += dx
+        self.y += dy
