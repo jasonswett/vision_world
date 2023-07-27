@@ -1,4 +1,5 @@
 from cell import Cell
+from cell_search import CellSearch
 
 MAX_DISTANCE_TO_LOOK = 100
 
@@ -20,18 +21,12 @@ class EyeCell(Cell):
         return nearest_cell_left.color if nearest_cell_left else None
 
     def nearest_cell_vertical(self, cells, direction):
-        for y in range(self.y, self.y + direction * MAX_DISTANCE_TO_LOOK, direction):
-            for cell in cells:
-                if cell.x == self.x and cell.y == y:
-                    return cell
-        return None
+        search = CellSearch(cells, self.x, self.y, direction, MAX_DISTANCE_TO_LOOK, True)
+        return search.nearest_cell()
 
     def nearest_cell_horizontal(self, cells, direction):
-        for x in range(self.x, self.x + direction * MAX_DISTANCE_TO_LOOK, direction):
-            for cell in cells:
-                if cell.y == self.y and cell.x == x:
-                    return cell
-        return None
+        search = CellSearch(cells, self.y, self.x, direction, MAX_DISTANCE_TO_LOOK, False)
+        return search.nearest_cell()
 
     def digest(self, cells):
         total = 0
