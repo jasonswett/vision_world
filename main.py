@@ -6,14 +6,15 @@ from cell import Cell
 from organism import Organism
 
 GENERATION_SIZE = 30
+SCREEN_WIDTH_IN_CELLS = 140
+FOOD_COUNT = 300
 
 def main():
-    SCREEN_WIDTH_IN_CELLS = 100
     SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
     pygame.init()
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
-    food_cells = random_food_cells(cell_screen, 500)
+    food_cells = random_food_cells(cell_screen, FOOD_COUNT)
     organisms = random_organisms(cell_screen, GENERATION_SIZE)
     clock = pygame.time.Clock()
 
@@ -33,7 +34,7 @@ def main():
                     food_cells.remove(food_cell_eaten)
 
         if counter % 10 == 0:
-            reap(organisms, cell_screen)
+            reap(organisms, food_cells, cell_screen)
 
         cell_screen.clear()
 
@@ -74,12 +75,13 @@ def random_food_cells(cell_screen, num_cells):
         cells.append(cell)
     return cells
 
-def reap(organisms, cell_screen):
+def reap(organisms, food_cells, cell_screen):
     for organism in organisms.copy():
         organism.age()
         if organism.health == 0:
             organisms.remove(organism)
         if len(organisms) <= 4:
             organisms.extend(produce_new_generation_from(organisms, cell_screen))
+            food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT - len(food_cells)))
 
 main()
