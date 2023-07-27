@@ -25,7 +25,7 @@ def main():
                 running = False
 
         counter += 1
-        if counter % 10 == 0:
+        if counter % 8 == 0:
             for organism in organisms:
                 food_cell_eaten = organism.move(cell_screen.width, cell_screen.height, food_cells)
                 if food_cell_eaten:
@@ -60,7 +60,7 @@ def produce_new_generation_from(organisms, cell_screen):
         parent_organism = random.choice(organisms)
         new_organism = Organism(cell_screen.random_x(), cell_screen.random_y())
         new_organism.genome.mapping = parent_organism.genome.mapping.copy()
-        if random.random() < 0.1:
+        if random.random() < 0.01:
             new_organism.genome.mutate()
         new_organisms.append(new_organism)
     return new_organisms
