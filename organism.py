@@ -3,10 +3,12 @@ from eye_cell import EyeCell
 from genome import Genome
 from move import Move
 
+MUTATION_RATE = 0.15
+
 class Organism:
     def __init__(self, x, y, genome=Genome()):
         self.genome = copy.deepcopy(genome)
-        if random.random() < 0.1:
+        if random.random() < MUTATION_RATE:
             self.genome.mutate()
 
         self.health = 20
