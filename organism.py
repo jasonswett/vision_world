@@ -11,8 +11,7 @@ class Organism:
 
     def move(self, food_cells):
         digest = self.eye_cell.digest(food_cells)
-        move = self.genome.mapping[digest]
-        dx, dy = Move().tuple(move)
+        dx, dy = Move().tuple(self.genome.direction(digest))
         for cell in self.cells:
             cell.move(dx, dy)
         for cell in self.cells:
