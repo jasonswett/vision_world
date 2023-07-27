@@ -15,6 +15,10 @@ class Organism:
         dx, dy = Move().tuple(move)
         for cell in self.cells:
             cell.move(dx, dy)
+        for cell in self.cells:
+            for food_cell in food_cells:
+                if food_cell.x == cell.x and food_cell.y == cell.y:
+                    return food_cell
 
     def age(self):
         self.health -= 1
