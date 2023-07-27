@@ -4,19 +4,19 @@ from cell_search import CellSearch
 MAX_DISTANCE_TO_LOOK = 100
 
 class EyeCell(Cell):
-    def north_color(self, cells):
+    def up_color(self, cells):
         nearest_cell_up = self.nearest_cell_vertical(cells, direction=-1)
         return nearest_cell_up.color if nearest_cell_up else None
 
-    def south_color(self, cells):
+    def down_color(self, cells):
         nearest_cell_down = self.nearest_cell_vertical(cells, direction=1)
         return nearest_cell_down.color if nearest_cell_down else None
 
-    def east_color(self, cells):
+    def right_color(self, cells):
         nearest_cell_right = self.nearest_cell_horizontal(cells, direction=1)
         return nearest_cell_right.color if nearest_cell_right else None
 
-    def west_color(self, cells):
+    def left_color(self, cells):
         nearest_cell_left = self.nearest_cell_horizontal(cells, direction=-1)
         return nearest_cell_left.color if nearest_cell_left else None
 
