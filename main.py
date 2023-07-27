@@ -15,20 +15,25 @@ def main():
     johnny = EyeCell(cell_screen.random_x(), cell_screen.random_y(), (255, 0, 0))
     clock = pygame.time.Clock()
 
+    counter = 0
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            elif event.type == pygame.KEYDOWN:  # check for KEYDOWN events
-                if event.key == pygame.K_LEFT:
-                    johnny.move(-1, 0)
-                elif event.key == pygame.K_RIGHT:
-                    johnny.move(1, 0)
-                elif event.key == pygame.K_UP:
-                    johnny.move(0, -1)
-                elif event.key == pygame.K_DOWN:
-                    johnny.move(0, 1)
+
+        keys = pygame.key.get_pressed()
+
+        counter += 1  # increment the counter each frame
+        if counter % 4 == 0:  # only move every 10th frame
+            if keys[pygame.K_LEFT]:
+                johnny.move(-1, 0)
+            if keys[pygame.K_RIGHT]:
+                johnny.move(1, 0)
+            if keys[pygame.K_UP]:
+                johnny.move(0, -1)
+            if keys[pygame.K_DOWN]:
+                johnny.move(0, 1)
 
         cell_screen.clear()
 
