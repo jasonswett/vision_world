@@ -24,16 +24,23 @@ def main():
 
         keys = pygame.key.get_pressed()
 
-        counter += 1  # increment the counter each frame
-        if counter % 4 == 0:  # only move every 10th frame
-            if keys[pygame.K_LEFT]:
-                johnny.move(-1, 0)
-            if keys[pygame.K_RIGHT]:
-                johnny.move(1, 0)
+        directions = {
+            "up": (0, -1),
+            "down": (0, 1),
+            "left": (-1, 0),
+            "right": (1, 0)
+        }
+
+        counter += 1
+        if counter % 4 == 0:
             if keys[pygame.K_UP]:
-                johnny.move(0, -1)
+                johnny.move(*directions["up"])
             if keys[pygame.K_DOWN]:
-                johnny.move(0, 1)
+                johnny.move(*directions["down"])
+            if keys[pygame.K_LEFT]:
+                johnny.move(*directions["left"])
+            if keys[pygame.K_RIGHT]:
+                johnny.move(*directions["right"])
 
         cell_screen.clear()
 
