@@ -1,5 +1,6 @@
 import pygame, random
 
+from move import Move
 from cell_screen import CellScreen
 from cell import Cell
 from organism import Organism
@@ -23,24 +24,18 @@ def main():
                 running = False
 
         keys = pygame.key.get_pressed()
-
-        directions = {
-            "up": (0, -1),
-            "down": (0, 1),
-            "left": (-1, 0),
-            "right": (1, 0)
-        }
+        move = Move()
 
         counter += 1
         if counter % 4 == 0:
             if keys[pygame.K_UP]:
-                johnny.move(*directions["up"])
+                johnny.move(*move.tuple("up"))
             if keys[pygame.K_DOWN]:
-                johnny.move(*directions["down"])
+                johnny.move(*move.tuple("down"))
             if keys[pygame.K_LEFT]:
-                johnny.move(*directions["left"])
+                johnny.move(*move.tuple("left"))
             if keys[pygame.K_RIGHT]:
-                johnny.move(*directions["right"])
+                johnny.move(*move.tuple("right"))
 
         cell_screen.clear()
 
