@@ -3,11 +3,11 @@ from genome import Genome
 from move import Move
 
 class Organism:
-    def __init__(self, x, y):
+    def __init__(self, x, y, genome=None):
+        self.genome = genome or Genome()
         self.health = 20
-        self.eye_cell = EyeCell(x, y, (255, 0, 255))
+        self.eye_cell = EyeCell(x, y, self.genome.color())
         self.cells = [self.eye_cell]
-        self.genome = Genome()
 
     def move(self, bounds_width, bounds_height, food_cells):
         digest = self.eye_cell.digest(food_cells)

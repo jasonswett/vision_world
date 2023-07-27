@@ -58,7 +58,7 @@ def produce_new_generation_from(organisms, cell_screen):
     new_organisms = []
     for _ in range(GENERATION_SIZE):
         parent_organism = random.choice(organisms)
-        new_organism = Organism(cell_screen.random_x(), cell_screen.random_y())
+        new_organism = Organism(cell_screen.random_x(), cell_screen.random_y(), parent_organism.genome)
         new_organism.genome.mapping = parent_organism.genome.mapping.copy()
         if random.random() < 0.01:
             new_organism.genome.mutate()
