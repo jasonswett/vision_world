@@ -4,7 +4,7 @@ from move import Move
 
 class Organism:
     def __init__(self, x, y):
-        self.health = 30
+        self.health = 20
         self.eye_cell = EyeCell(x, y, (255, 0, 255))
         self.cells = [self.eye_cell]
         self.genome = Genome()

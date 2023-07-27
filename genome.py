@@ -7,3 +7,7 @@ class Genome:
 
     def direction(self, digest):
         return self.mapping[digest]
+
+    def mutate(self):
+        key_to_mutate = random.choice(list(self.mapping.keys()))
+        self.mapping[key_to_mutate] = random.choice(["up", "down", "left", "right"])
