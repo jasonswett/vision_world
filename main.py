@@ -59,7 +59,7 @@ def produce_new_generation_from(organisms, cell_screen):
     new_organisms = []
     for _ in range(GENERATION_SIZE):
         parent_organism = random.choice(organisms)
-        new_organism = Organism(cell_screen.random_x(), cell_screen.random_y(), parent_organism.genome.copy())
+        new_organism = Organism(cell_screen.random_x(), cell_screen.random_y(), parent_organism.genome)
         new_organisms.append(new_organism)
     return new_organisms
 
