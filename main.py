@@ -5,7 +5,7 @@ from cell_screen import CellScreen
 from cell import Cell
 from organism import Organism
 
-GENERATION_SIZE = 50
+GENERATION_SIZE = 80
 SCREEN_WIDTH_IN_CELLS = 140
 FOOD_COUNT = 100
 
@@ -30,7 +30,7 @@ def main():
             for organism in organisms:
                 food_cell_eaten = organism.move(cell_screen.width, cell_screen.height, food_cells)
                 if food_cell_eaten:
-                    organism.health += 20
+                    organism.health += 50
                     food_cells.remove(food_cell_eaten)
 
         if counter % 10 == 0:
@@ -59,10 +59,7 @@ def produce_new_generation_from(organisms, cell_screen):
     new_organisms = []
     for _ in range(GENERATION_SIZE):
         parent_organism = random.choice(organisms)
-        new_organism = Organism(cell_screen.random_x(), cell_screen.random_y(), parent_organism.genome)
-        new_organism.genome.mapping = parent_organism.genome.mapping.copy()
-        if random.random() < 0.01:
-            new_organism.genome.mutate()
+        new_organism = Organism(cell_screen.random_x(), cell_screen.random_y(), parent_organism.genome.copy())
         new_organisms.append(new_organism)
     return new_organisms
 

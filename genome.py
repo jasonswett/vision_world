@@ -3,14 +3,26 @@ import random, hashlib
 class Genome:
     def __init__(self):
         # 11 because a digest value can go up to 10, and 0..10 is 11 elements
-        self.mapping = {i: random.choice(["up", "down", "left", "right"]) for i in range(11)}
+        self.mapping = {i: random.choice(["up", "down", "left", "right", "same", "same", "same", "same"]) for i in range(11)}
+        self.last_direction = None
 
     def direction(self, digest):
-        return self.mapping[digest]
+        next_direction = self.mapping[digest]
+
+        if next_direction == "same":
+            # If the last direction is None, we cannot continue in the same direction.
+            # So we select a new random direction
+            if self.last_direction is None:
+                next_direction = random.choice(["up", "down", "left", "right"])
+            else:
+                next_direction = self.last_direction
+
+        self.last_direction = next_direction
+        return next_direction
 
     def mutate(self):
         key_to_mutate = random.choice(list(self.mapping.keys()))
-        self.mapping[key_to_mutate] = random.choice(["up", "down", "left", "right"])
+        self.mapping[key_to_mutate] = random.choice(["up", "down", "left", "right", "same"])
 
     def color(self):
         # Convert the genome mapping to a string

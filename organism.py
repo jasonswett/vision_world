@@ -1,20 +1,27 @@
+import random
 from eye_cell import EyeCell
 from genome import Genome
 from move import Move
 
 class Organism:
-    def __init__(self, x, y, genome=None):
-        self.genome = genome or Genome()
+    def __init__(self, x, y, genome=Genome()):
+        self.genome = genome
+        if random.random() < 0.01:
+            genome.mutate()
+
         self.health = 20
         self.eye_cell = EyeCell(x, y, self.genome.color())
         self.cells = [self.eye_cell]
+        self.last_direction = None
 
     def move(self, bounds_width, bounds_height, food_cells):
         digest = self.eye_cell.digest(food_cells)
         for cell in self.cells:
             move = Move(cell.coordinates(), bounds_width, bounds_height)
-            coordinates = move.coordinates(self.genome.direction(digest))
+            direction = self.genome.direction(digest)
+            coordinates = move.coordinates(direction)
             cell.move_to(coordinates)
+            self.last_direction = direction
         for cell in self.cells:
             for food_cell in food_cells:
                 if food_cell.x == cell.x and food_cell.y == cell.y:
