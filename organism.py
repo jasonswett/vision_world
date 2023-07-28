@@ -3,7 +3,7 @@ from eye_cell import EyeCell
 from genome import Genome
 from move import Move
 
-MUTATION_RATE = 0.15
+MUTATION_RATE = 0.1
 
 class Organism:
     def __init__(self, x, y, genome=Genome()):
@@ -11,6 +11,7 @@ class Organism:
         if random.random() < MUTATION_RATE:
             self.genome.mutate()
         print(self.genome.mapping)
+        print(f"Genome size: {len(self.genome.mapping)}")
 
         self.health = 20
         self.eye_cell = EyeCell(x, y, self.genome.color())
@@ -19,6 +20,8 @@ class Organism:
 
     def move(self, bounds_width, bounds_height, food_cells):
         digest = self.eye_cell.digest(food_cells)
+        for cell in self.cells:
+            cell.color = self.genome.color()
         for cell in self.cells:
             move = Move(cell.coordinates(), bounds_width, bounds_height)
             direction = self.genome.direction(digest)
