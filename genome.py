@@ -7,6 +7,9 @@ class Genome:
         self.mapping = {i: random.choice(["up", "down", "left", "right", "same", "same", "same", "same"]) for i in range(GENOME_LENGTH + 1)}
         self.last_direction = None
 
+    def __str__(self):
+        return '\n'.join(f'{k}: {v}' for k, v in self.mapping.items())
+
     def direction(self, digest):
         next_direction = self.mapping[digest]
 
