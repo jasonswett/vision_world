@@ -1,5 +1,5 @@
 class CellSearch:
-    MAX_DISTANCE_TO_LOOK = 10
+    MAX_DISTANCE_TO_LOOK = 20
 
     def __init__(self, food_cells, origin_x, origin_y, x_direction, y_direction):
         self.food_cells = food_cells
@@ -17,9 +17,14 @@ class CellSearch:
             y += self.y_direction
 
             if self._cell_at_coordinates(x, y) is not None:
-                return distance
+                if distance < 0.2 * self.MAX_DISTANCE_TO_LOOK:
+                    return '01'
+                elif distance < 0.5 * self.MAX_DISTANCE_TO_LOOK:
+                    return '10'
+                else:
+                    return '11'
 
-        return None
+        return '00'
 
     def _cell_at_coordinates(self, x, y):
         for food_cell in self.food_cells:
