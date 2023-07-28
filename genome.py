@@ -1,16 +1,20 @@
 import random, hashlib
+from cell_search import CellSearch
 
 directions = ["up", "down", "left", "right", "same", "same", "same", "same"]
 
 class Genome:
     def __init__(self):
-        self.mapping = {format(i, '04b'): random.choice(directions) for i in range(16)}
+        self.mapping = {}
         self.last_direction = None
 
     def __str__(self):
         return '\n'.join(f'{k}: {v}' for k, v in self.mapping.items())
 
     def direction(self, digest):
+        if digest not in self.mapping:
+            self.mapping[digest] = random.choice(directions)
+
         next_direction = self.mapping[digest]
 
         if next_direction == "same":
@@ -25,6 +29,8 @@ class Genome:
         return next_direction
 
     def mutate(self):
+        if not self.mapping:
+            return
         key_to_mutate = random.choice(list(self.mapping.keys()))
         self.mapping[key_to_mutate] = random.choice(["up", "down", "left", "right", "same"])
 

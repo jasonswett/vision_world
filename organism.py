@@ -10,6 +10,7 @@ class Organism:
         self.genome = copy.deepcopy(genome)
         if random.random() < MUTATION_RATE:
             self.genome.mutate()
+        print(self.genome.mapping)
 
         self.health = 20
         self.eye_cell = EyeCell(x, y, self.genome.color())
