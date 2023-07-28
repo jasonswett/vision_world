@@ -11,8 +11,6 @@ class Organism:
         if random.random() < MUTATION_RATE:
             self.genome.mutate()
 
-        print('--------')
-        print(str(self.genome))
         self.health = 20
         self.eye_cell = EyeCell(x, y, self.genome.color())
         self.cells = [self.eye_cell]

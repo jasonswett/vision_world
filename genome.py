@@ -1,10 +1,10 @@
 import random, hashlib
 
-GENOME_LENGTH = 16
+directions = ["up", "down", "left", "right", "same", "same", "same", "same"]
 
 class Genome:
     def __init__(self):
-        self.mapping = {i: random.choice(["up", "down", "left", "right", "same", "same", "same", "same"]) for i in range(GENOME_LENGTH + 1)}
+        self.mapping = {format(i, '04b'): random.choice(directions) for i in range(16)}
         self.last_direction = None
 
     def __str__(self):
