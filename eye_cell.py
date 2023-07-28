@@ -1,7 +1,7 @@
 from cell import Cell
 from cell_search import CellSearch
 
-MAX_DISTANCE_TO_LOOK = 100
+MAX_DISTANCE_TO_LOOK = 10
 
 class EyeCell(Cell):
     def digest(self, cells):

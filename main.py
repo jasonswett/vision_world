@@ -5,7 +5,7 @@ from cell_screen import CellScreen
 from cell import Cell
 from organism import Organism
 
-GENERATION_SIZE = 80
+GENERATION_SIZE = 40
 SCREEN_WIDTH_IN_CELLS = 180
 FOOD_COUNT = 200
 
