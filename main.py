@@ -68,7 +68,7 @@ def random_food_cells(cell_screen, num_cells):
     for _ in range(num_cells):
         x = cell_screen.random_x()
         y = cell_screen.random_y()
-        cell = Cell(x, y, (0, 255, 0))
+        cell = Cell(x, y, (0, 127, 0))
         cells.append(cell)
     return cells
 
