@@ -1,7 +1,7 @@
 import random, hashlib
 from cell_search import CellSearch
 
-directions = ["up", "down", "left", "right", "same"]
+directions = ["up", "down", "left", "right", "same", "same"]
 
 class Genome:
     def __init__(self):
