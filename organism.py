@@ -3,7 +3,7 @@ from eye_cell import EyeCell
 from genome import Genome
 from move import Move
 
-MUTATION_RATE = 0.1
+MUTATION_RATE = 0.01
 
 class Organism:
     def __init__(self, x, y, genome=Genome()):
@@ -13,7 +13,7 @@ class Organism:
         print(self.genome.mapping)
         print(f"Genome size: {len(self.genome.mapping)}")
 
-        self.health = 20
+        self.health = 30
         self.eye_cell = EyeCell(x, y, self.genome.color())
         self.cells = [self.eye_cell]
         self.last_direction = None

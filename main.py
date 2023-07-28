@@ -6,8 +6,8 @@ from cell import Cell
 from organism import Organism
 
 GENERATION_SIZE = 40
-SCREEN_WIDTH_IN_CELLS = 180
-FOOD_COUNT = 200
+SCREEN_WIDTH_IN_CELLS = 140
+FOOD_COUNT = 800
 
 def main():
     SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
@@ -26,11 +26,11 @@ def main():
                 running = False
 
         counter += 1
-        if counter % 8 == 0:
+        if counter % 3 == 0:
             for organism in organisms:
                 food_cell_eaten = organism.move(cell_screen.width, cell_screen.height, food_cells)
                 if food_cell_eaten:
-                    organism.health += 50
+                    organism.health += 20
                     food_cells.remove(food_cell_eaten)
 
         if counter % 10 == 0:
