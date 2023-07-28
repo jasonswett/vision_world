@@ -8,7 +8,7 @@ from organism import Organism
 SCREEN_WIDTH_IN_CELLS = 180
 FOOD_COUNT = 1000
 GENERATION_SIZE = 100
-REPRODUCTION_THRESHOLD = 10
+REPRODUCTION_THRESHOLD = 4
 
 def main():
     SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
@@ -35,8 +35,6 @@ def main():
                 if food_cell_eaten:
                     organism.health += 20
                     food_cells.remove(food_cell_eaten)
-
-        if counter % 10 == 0:
             generation_counter = reap(organisms, food_cells, cell_screen, generation_counter)
 
         cell_screen.clear()

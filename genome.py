@@ -1,21 +1,23 @@
 import random, hashlib
 from cell_search import CellSearch
 
-directions = ["up", "down", "left", "right", "same", "same", "same", "same"]
+DIRECTIONS = ["up", "down", "left", "right", "same", "same", "same", "same"]
 
 class Genome:
     def __init__(self):
-        self.mapping = {}
+        self.rules = {}
         self.last_direction = None
 
     def __str__(self):
-        return '\n'.join(f'{k}: {v}' for k, v in self.mapping.items())
+        return '\n'.join(f'{k}: {v}' for k, v in self.rules.items())
 
     def direction(self, digest):
-        if digest not in self.mapping:
-            self.mapping[digest] = random.choice(directions)
+        key = digest
 
-        next_direction = self.mapping[digest]
+        if key not in self.rules:
+            self.rules[key] = random.choice(DIRECTIONS)
+
+        next_direction = self.rules[key]
 
         if next_direction == "same":
             # If the last direction is None, we cannot continue in the same direction.
@@ -29,14 +31,14 @@ class Genome:
         return next_direction
 
     def mutate(self):
-        if not self.mapping:
+        if not self.rules:
             return
-        key_to_mutate = random.choice(list(self.mapping.keys()))
-        self.mapping[key_to_mutate] = random.choice(["up", "down", "left", "right", "same"])
+        key_to_mutate = random.choice(list(self.rules.keys()))
+        self.rules[key_to_mutate] = random.choice(["up", "down", "left", "right", "same"])
 
     def color(self):
-        # Convert the genome mapping to a string
-        genome_string = str(self.mapping)
+        # Convert the genome rules to a string
+        genome_string = str(self.rules)
 
         # Hash the genome string into a hex value
         hash_object = hashlib.md5(genome_string.encode())

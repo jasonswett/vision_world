@@ -3,22 +3,23 @@ from eye_cell import EyeCell
 from genome import Genome
 from move import Move
 
-MUTATION_RATE = 0.01
+MUTATION_RATE = 0.1
 
 class Organism:
     def __init__(self, x, y, genome=Genome()):
         self.genome = copy.deepcopy(genome)
         if random.random() < MUTATION_RATE:
             self.genome.mutate()
-        print(self.genome.mapping)
-        print(f"Genome size: {len(self.genome.mapping)}")
+        print(self.genome.rules)
+        print(f"Genome size: {len(self.genome.rules)}")
 
-        self.health = 30
+        self.health = 50
         self.eye_cell = EyeCell(x, y, self.genome.color())
         self.cells = [self.eye_cell]
         self.last_direction = None
 
     def move(self, bounds_width, bounds_height, food_cells):
+        self.health -= 1
         digest = self.eye_cell.digest(food_cells)
         for cell in self.cells:
             cell.color = self.genome.color()
