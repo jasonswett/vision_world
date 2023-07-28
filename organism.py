@@ -3,7 +3,7 @@ from eye_cell import EyeCell
 from genome import Genome
 from move import Move
 
-MUTATION_RATE = 0.1
+MUTATION_RATE = 0.01
 
 class Organism:
     def __init__(self, x, y, genome=Genome()):

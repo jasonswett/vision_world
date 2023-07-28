@@ -5,8 +5,8 @@ from cell_screen import CellScreen
 from cell import Cell
 from organism import Organism
 
-SCREEN_WIDTH_IN_CELLS = 140
-FOOD_COUNT = 800
+SCREEN_WIDTH_IN_CELLS = 180
+FOOD_COUNT = 1000
 GENERATION_SIZE = 100
 REPRODUCTION_THRESHOLD = 10
 
