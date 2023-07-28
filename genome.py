@@ -12,7 +12,7 @@ class Genome:
         return '\n'.join(f'{k}: {v}' for k, v in self.rules.items())
 
     def direction(self, digest):
-        key = digest
+        key = f"{digest}/{self.last_direction}" if self.last_direction else digest
 
         if key not in self.rules:
             self.rules[key] = random.choice(DIRECTIONS)
@@ -20,8 +20,6 @@ class Genome:
         next_direction = self.rules[key]
 
         if next_direction == "same":
-            # If the last direction is None, we cannot continue in the same direction.
-            # So we select a new random direction
             if self.last_direction is None:
                 next_direction = random.choice(["up", "down", "left", "right"])
             else:
