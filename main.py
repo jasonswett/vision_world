@@ -5,10 +5,11 @@ from cell_screen import CellScreen
 from cell import Cell
 from organism import Organism
 
-SCREEN_WIDTH_IN_CELLS = 180
+SCREEN_WIDTH_IN_CELLS = 140
 FOOD_COUNT = 1000
 GENERATION_SIZE = 100
-REPRODUCTION_THRESHOLD = 4
+REPRODUCTION_THRESHOLD = 10
+REWARD_FOR_EATING = 10
 
 def main():
     SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
@@ -33,7 +34,7 @@ def main():
             for organism in organisms:
                 food_cell_eaten = organism.move(cell_screen.width, cell_screen.height, food_cells)
                 if food_cell_eaten:
-                    organism.health += 20
+                    organism.health += REWARD_FOR_EATING
                     food_cells.remove(food_cell_eaten)
             generation_counter = reap(organisms, food_cells, cell_screen, generation_counter)
 
@@ -77,7 +78,7 @@ def random_food_cells(cell_screen, num_cells):
 
 def reap(organisms, food_cells, cell_screen, generation_counter):
     for organism in organisms.copy():
-        organism.age()
+        #organism.age()
         if organism.health == 0:
             organisms.remove(organism)
         if len(organisms) <= REPRODUCTION_THRESHOLD:
