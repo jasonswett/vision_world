@@ -6,10 +6,13 @@ from move import Move
 MUTATION_RATE = 0.01
 
 class Organism:
-    def __init__(self, x, y, genome=Genome()):
-        self.genome = copy.deepcopy(genome)
-        if random.random() < MUTATION_RATE:
-            self.genome.mutate()
+    def __init__(self, x, y, genome=None):
+        if genome:
+            self.genome = copy.deepcopy(genome)
+            if random.random() < MUTATION_RATE:
+                self.genome.mutate()
+        else:
+            self.genome = Genome()
 
         self.health = 10
         self.eye_cell = EyeCell(x, y, self.genome.color())

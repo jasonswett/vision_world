@@ -4,10 +4,10 @@ from move import Move
 from cell_screen import CellScreen
 from cell import Cell
 from organism import Organism
+from generation import Generation
 
 SCREEN_WIDTH_IN_CELLS = 140
 FOOD_COUNT = 1000
-GENERATION_SIZE = 100
 REPRODUCTION_THRESHOLD = 10
 REWARD_FOR_EATING = 10
 
@@ -17,7 +17,7 @@ def main():
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
     food_cells = random_food_cells(cell_screen, FOOD_COUNT)
-    organisms = random_organisms(cell_screen, GENERATION_SIZE)
+    organisms = Generation([], cell_screen).offspring()
     clock = pygame.time.Clock()
     font = pygame.font.Font(None, 36)
 
@@ -59,14 +59,6 @@ def random_organisms(cell_screen, count):
         organisms.append(Organism(cell_screen.random_x(), cell_screen.random_y()))
     return organisms
 
-def produce_new_generation_from(organisms, cell_screen):
-    new_organisms = []
-    for _ in range(GENERATION_SIZE):
-        parent_organism = random.choice(organisms)
-        new_organism = Organism(cell_screen.random_x(), cell_screen.random_y(), parent_organism.genome)
-        new_organisms.append(new_organism)
-    return new_organisms
-
 def random_food_cells(cell_screen, num_cells):
     cells = []
     for _ in range(num_cells):
@@ -78,11 +70,10 @@ def random_food_cells(cell_screen, num_cells):
 
 def reap(organisms, food_cells, cell_screen, generation_counter):
     for organism in organisms.copy():
-        #organism.age()
         if organism.health == 0:
             organisms.remove(organism)
         if len(organisms) <= REPRODUCTION_THRESHOLD:
-            organisms.extend(produce_new_generation_from(organisms, cell_screen))
+            organisms.extend(Generation(organisms, cell_screen).offspring())
             food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT - len(food_cells)))
             generation_counter += 1
     return generation_counter
