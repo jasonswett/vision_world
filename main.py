@@ -39,6 +39,7 @@ def main():
             reap(organisms, food_cells, cell_screen, generation_counter)
 
         if len(organisms) <= REPRODUCTION_THRESHOLD:
+            print(f"healthiest: {healthiest_organism(organisms).health}")
             organisms.extend(Generation(organisms, cell_screen).offspring())
             food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT - len(food_cells)))
             generation_counter += 1
@@ -57,6 +58,11 @@ def main():
         clock.tick(60)
 
     pygame.quit()
+
+def healthiest_organism(organisms):
+    if not organisms:
+        return None
+    return max(organisms, key=lambda organism: organism.health)
 
 def random_food_cells(cell_screen, num_cells):
     cells = []
