@@ -53,12 +53,6 @@ def main():
 
     pygame.quit()
 
-def random_organisms(cell_screen, count):
-    organisms = []
-    for _ in range(count):
-        organisms.append(Organism(cell_screen.random_x(), cell_screen.random_y()))
-    return organisms
-
 def random_food_cells(cell_screen, num_cells):
     cells = []
     for _ in range(num_cells):
