@@ -36,7 +36,12 @@ def main():
                 if food_cell_eaten:
                     organism.health += REWARD_FOR_EATING
                     food_cells.remove(food_cell_eaten)
-            generation_counter = reap(organisms, food_cells, cell_screen, generation_counter)
+            reap(organisms, food_cells, cell_screen, generation_counter)
+
+        if len(organisms) <= REPRODUCTION_THRESHOLD:
+            organisms.extend(Generation(organisms, cell_screen).offspring())
+            food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT - len(food_cells)))
+            generation_counter += 1
 
         cell_screen.clear()
 
@@ -66,11 +71,6 @@ def reap(organisms, food_cells, cell_screen, generation_counter):
     for organism in organisms.copy():
         if organism.health == 0:
             organisms.remove(organism)
-        if len(organisms) <= REPRODUCTION_THRESHOLD:
-            organisms.extend(Generation(organisms, cell_screen).offspring())
-            food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT - len(food_cells)))
-            generation_counter += 1
-    return generation_counter
 
 def draw_generation_count(screen, font, generation_counter):
     text = font.render(f'Generation: {generation_counter}', True, (255, 255, 255), (0, 0, 0))
