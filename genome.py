@@ -32,7 +32,7 @@ class Genome:
         if not self.rules:
             return
         key_to_mutate = random.choice(list(self.rules.keys()))
-        self.rules[key_to_mutate] = random.choice(["up", "down", "left", "right", "same"])
+        self.rules[key_to_mutate] = random.choice(DIRECTIONS)
 
     def color(self):
         # Convert the genome rules to a string
