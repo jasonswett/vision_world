@@ -1,9 +1,10 @@
 import random, hashlib
 from cell_search import CellSearch
 
-DIRECTIONS = ["up", "down", "left", "right", "same", "same", "same", "same"]
-
 class Genome:
+    DIRECTIONS = ["up", "down", "left", "right", "same", "same", "same", "same"]
+    PERCENTAGE_OF_GENES_TO_MUTATE = 0.2
+
     def __init__(self):
         self.rules = {}
         self.last_direction = None
@@ -15,7 +16,7 @@ class Genome:
         key = f"{digest}/{self.last_direction}" if self.last_direction else digest
 
         if key not in self.rules:
-            self.rules[key] = random.choice(DIRECTIONS)
+            self.rules[key] = random.choice(self.DIRECTIONS)
 
         next_direction = self.rules[key]
 
@@ -31,8 +32,13 @@ class Genome:
     def mutate(self):
         if not self.rules:
             return
-        key_to_mutate = random.choice(list(self.rules.keys()))
-        self.rules[key_to_mutate] = random.choice(DIRECTIONS)
+
+        print("mutating")
+        number_of_genes_to_mutate = int(len(self.rules.keys()) * self.PERCENTAGE_OF_GENES_TO_MUTATE)
+        keys_to_mutate = random.sample(list(self.rules.keys()), number_of_genes_to_mutate)
+        
+        for key in keys_to_mutate:
+            self.rules[key] = random.choice(self.DIRECTIONS)
 
     def color(self):
         # Convert the genome rules to a string
