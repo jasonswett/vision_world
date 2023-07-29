@@ -10,8 +10,6 @@ class Organism:
         self.genome = copy.deepcopy(genome)
         if random.random() < MUTATION_RATE:
             self.genome.mutate()
-        print(self.genome.rules)
-        print(f"Genome size: {len(self.genome.rules)}")
 
         self.health = 10
         self.eye_cell = EyeCell(x, y, self.genome.color())
