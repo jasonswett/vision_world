@@ -1,5 +1,5 @@
 class CellSearch:
-    MAX_DISTANCE_TO_LOOK = 20
+    MAX_DISTANCE_TO_LOOK = 8
 
     def __init__(self, food_cells, origin_x, origin_y, x_direction, y_direction):
         self.food_cells = food_cells
