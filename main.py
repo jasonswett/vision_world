@@ -10,6 +10,7 @@ SCREEN_WIDTH_IN_CELLS = 140
 FOOD_COUNT = 1000
 REPRODUCTION_THRESHOLD = 10
 REWARD_FOR_EATING = 50
+SLOWDOWN_DELAY = 0.03
 
 def main():
     SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
@@ -28,7 +29,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        time.sleep(0.03)
+        time.sleep(SLOWDOWN_DELAY)
         for organism in organisms:
             food_cell_eaten = organism.move(cell_screen.width, cell_screen.height, food_cells)
             if food_cell_eaten:
