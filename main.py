@@ -23,12 +23,9 @@ def main():
     font = pygame.font.Font(None, 36)
 
     generation_game_loop_counter = 1
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+    pygame.event.get()
 
+    while True:
         time.sleep(SLOWDOWN_DELAY)
         for organism in organisms:
             food_cell_eaten = organism.move(cell_screen.width, cell_screen.height, food_cells)
