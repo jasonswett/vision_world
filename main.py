@@ -27,11 +27,16 @@ def main():
 
     while True:
         time.sleep(SLOWDOWN_DELAY)
+
         for organism in organisms:
-            food_cell_eaten = organism.move(cell_screen.width, cell_screen.height, food_cells)
-            if food_cell_eaten:
-                organism.health += REWARD_FOR_EATING
-                food_cells.remove(food_cell_eaten)
+            organism.move(cell_screen.width, cell_screen.height, food_cells)
+
+            for cell in organism.cells:
+                food_cell = food_cell_at((cell.x, cell.y), food_cells)
+                if food_cell:
+                    organism.health += REWARD_FOR_EATING
+                    food_cells.remove(food_cell)
+
         reap(organisms)
 
         if len(organisms) <= REPRODUCTION_THRESHOLD:
@@ -88,5 +93,11 @@ def draw_generation_count(screen, font, generation_game_loop_counter):
     text_rect = text.get_rect()
     text_rect.bottomright = screen.get_rect().bottomright
     screen.blit(text, text_rect)
+
+def food_cell_at(coordinates, food_cells):
+    for food_cell in food_cells:
+        if food_cell.x == coordinates[0] and food_cell.y == coordinates[1]:
+            return food_cell
+    return None
 
 main()

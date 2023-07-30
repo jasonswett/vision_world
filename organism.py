@@ -32,10 +32,7 @@ class Organism:
             coordinates = move.coordinates(direction)
             cell.move_to(coordinates)
             self.last_direction = direction
-        for cell in self.cells:
-            for food_cell in food_cells:
-                if food_cell.x == cell.x and food_cell.y == cell.y:
-                    return food_cell
+        return coordinates
 
     def age(self):
         self.health -= 1
