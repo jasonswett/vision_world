@@ -1,4 +1,4 @@
-import pygame, random
+import pygame, random, time
 
 from move import Move
 from cell_screen import CellScreen
@@ -21,22 +21,20 @@ def main():
     clock = pygame.time.Clock()
     font = pygame.font.Font(None, 36)
 
-    counter = 0
-    generation_counter = 1
+    generation_game_loop_counter = 1
     running = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
 
-        counter += 1
-        if counter % 3 == 0:
-            for organism in organisms:
-                food_cell_eaten = organism.move(cell_screen.width, cell_screen.height, food_cells)
-                if food_cell_eaten:
-                    organism.health += REWARD_FOR_EATING
-                    food_cells.remove(food_cell_eaten)
-            reap(organisms)
+        time.sleep(0.03)
+        for organism in organisms:
+            food_cell_eaten = organism.move(cell_screen.width, cell_screen.height, food_cells)
+            if food_cell_eaten:
+                organism.health += REWARD_FOR_EATING
+                food_cells.remove(food_cell_eaten)
+        reap(organisms)
 
         if len(organisms) <= REPRODUCTION_THRESHOLD:
             healthiest_organisms = organisms_ordered_by_health(organisms)[:4]
@@ -47,7 +45,7 @@ def main():
             print(f"average improvement of healthiest four: {average_improvement}")
             organisms.extend(Generation(healthiest_organisms, cell_screen).offspring())
             food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT - len(food_cells)))
-            generation_counter += 1
+            generation_game_loop_counter += 1
 
         if len(food_cells) <= 0:
             food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT))
@@ -60,7 +58,7 @@ def main():
         for organism in organisms:
             cell_screen.draw_organism(organism)
 
-        draw_generation_count(cell_screen.surface, font, generation_counter)
+        draw_generation_count(cell_screen.surface, font, generation_game_loop_counter)
 
         pygame.display.update()
         clock.tick(60)
@@ -87,8 +85,8 @@ def reap(organisms):
         if organism.health == 0:
             organisms.remove(organism)
 
-def draw_generation_count(screen, font, generation_counter):
-    text = font.render(f'Generation: {generation_counter}', True, (255, 255, 255), (0, 0, 0))
+def draw_generation_count(screen, font, generation_game_loop_counter):
+    text = font.render(f'Generation: {generation_game_loop_counter}', True, (255, 255, 255), (0, 0, 0))
     text_rect = text.get_rect()
     text_rect.bottomright = screen.get_rect().bottomright
     screen.blit(text, text_rect)
