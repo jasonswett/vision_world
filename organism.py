@@ -12,9 +12,10 @@ class Organism:
             if random.random() < MUTATION_RATE:
                 self.genome.mutate()
         else:
+            print("making fresh genome")
             self.genome = Genome()
 
-        self.health = 10
+        self.health = 100
         self.eye_cell = EyeCell(x, y, self.genome.color())
         self.cells = [self.eye_cell]
         self.last_direction = None

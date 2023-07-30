@@ -9,7 +9,7 @@ from generation import Generation
 SCREEN_WIDTH_IN_CELLS = 140
 FOOD_COUNT = 1000
 REPRODUCTION_THRESHOLD = 10
-REWARD_FOR_EATING = 10
+REWARD_FOR_EATING = 50
 
 def main():
     SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
@@ -39,10 +39,13 @@ def main():
             reap(organisms)
 
         if len(organisms) <= REPRODUCTION_THRESHOLD:
-            print(f"healthiest: {healthiest_organism(organisms).health}")
-            organisms.extend(Generation(organisms, cell_screen).offspring())
+            print(f"healthiest: {healthiest_organism(organisms).health/REWARD_FOR_EATING}")
+            organisms.extend(Generation([healthiest_organism(organisms)], cell_screen).offspring())
             food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT - len(food_cells)))
             generation_counter += 1
+
+        if len(food_cells) <= 0:
+            food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT))
 
         cell_screen.clear()
 
