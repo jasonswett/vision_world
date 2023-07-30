@@ -36,7 +36,7 @@ def main():
                 if food_cell_eaten:
                     organism.health += REWARD_FOR_EATING
                     food_cells.remove(food_cell_eaten)
-            reap(organisms, food_cells, cell_screen, generation_counter)
+            reap(organisms)
 
         if len(organisms) <= REPRODUCTION_THRESHOLD:
             print(f"healthiest: {healthiest_organism(organisms).health}")
@@ -73,7 +73,7 @@ def random_food_cells(cell_screen, num_cells):
         cells.append(cell)
     return cells
 
-def reap(organisms, food_cells, cell_screen, generation_counter):
+def reap(organisms):
     for organism in organisms.copy():
         if organism.health == 0:
             organisms.remove(organism)
