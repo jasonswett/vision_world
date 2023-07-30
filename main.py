@@ -39,8 +39,13 @@ def main():
             reap(organisms)
 
         if len(organisms) <= REPRODUCTION_THRESHOLD:
-            print(f"healthiest: {healthiest_organism(organisms).health/REWARD_FOR_EATING}")
-            organisms.extend(Generation([healthiest_organism(organisms)], cell_screen).offspring())
+            healthiest_organisms = organisms_ordered_by_health(organisms)[:4]
+            improvements = [improvement(organism) for organism in healthiest_organisms]
+            print("-------------------------------------")
+            print(f"healthiest four: {improvements}")
+            average_improvement = sum(improvements) / 4
+            print(f"average improvement of healthiest four: {average_improvement}")
+            organisms.extend(Generation(healthiest_organisms, cell_screen).offspring())
             food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT - len(food_cells)))
             generation_counter += 1
 
@@ -62,10 +67,11 @@ def main():
 
     pygame.quit()
 
-def healthiest_organism(organisms):
-    if not organisms:
-        return None
-    return max(organisms, key=lambda organism: organism.health)
+def improvement(organism):
+    return (organism.health - Organism.STARTING_HEALTH)/REWARD_FOR_EATING
+
+def organisms_ordered_by_health(organisms):
+    return sorted(organisms, key=lambda organism: organism.health, reverse=True)
 
 def random_food_cells(cell_screen, num_cells):
     cells = []

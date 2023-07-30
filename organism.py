@@ -3,19 +3,20 @@ from eye_cell import EyeCell
 from genome import Genome
 from move import Move
 
-MUTATION_RATE = 0.01
-
 class Organism:
+    MUTATION_RATE = 0.01
+    STARTING_HEALTH = 100
+
     def __init__(self, x, y, genome=None):
         if genome:
             self.genome = copy.deepcopy(genome)
-            if random.random() < MUTATION_RATE:
+            if random.random() < self.MUTATION_RATE:
                 self.genome.mutate()
         else:
             print("making fresh genome")
             self.genome = Genome()
 
-        self.health = 100
+        self.health = self.STARTING_HEALTH
         self.eye_cell = EyeCell(x, y, self.genome.color())
         self.cells = [self.eye_cell]
         self.last_direction = None
