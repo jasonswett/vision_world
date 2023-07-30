@@ -9,7 +9,6 @@ from generation import Generation
 SCREEN_WIDTH_IN_CELLS = 140
 FOOD_COUNT = 1000
 REPRODUCTION_THRESHOLD = 10
-REWARD_FOR_EATING = 50
 SLOWDOWN_DELAY = 0.03
 
 def main():
@@ -31,11 +30,10 @@ def main():
         for organism in organisms:
             organism.move(cell_screen.width, cell_screen.height, food_cells)
 
-            for cell in organism.cells:
-                food_cell = food_cell_at((cell.x, cell.y), food_cells)
-                if food_cell:
-                    organism.health += REWARD_FOR_EATING
-                    food_cells.remove(food_cell)
+            food_cell = eatable_food_cell(organism, food_cells)
+            if food_cell:
+                organism.nourish()
+                food_cells.remove(food_cell)
 
         reap(organisms)
 
@@ -69,7 +67,7 @@ def main():
     pygame.quit()
 
 def improvement(organism):
-    return (organism.health - Organism.STARTING_HEALTH)/REWARD_FOR_EATING
+    return (organism.health - Organism.STARTING_HEALTH)/Organism.REWARD_FOR_EATING
 
 def organisms_ordered_by_health(organisms):
     return sorted(organisms, key=lambda organism: organism.health, reverse=True)
@@ -94,10 +92,11 @@ def draw_generation_count(screen, font, generation_game_loop_counter):
     text_rect.bottomright = screen.get_rect().bottomright
     screen.blit(text, text_rect)
 
-def food_cell_at(coordinates, food_cells):
-    for food_cell in food_cells:
-        if food_cell.x == coordinates[0] and food_cell.y == coordinates[1]:
-            return food_cell
+def eatable_food_cell(organism, food_cells):
+    for cell in organism.cells:
+        for food_cell in food_cells:
+            if food_cell.x == cell.x and food_cell.y == cell.y:
+                return food_cell
     return None
 
 main()

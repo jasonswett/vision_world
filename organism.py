@@ -6,6 +6,7 @@ from move import Move
 class Organism:
     MUTATION_RATE = 0.01
     STARTING_HEALTH = 100
+    REWARD_FOR_EATING = 50
 
     def __init__(self, x, y, genome=None):
         if genome:
@@ -36,3 +37,6 @@ class Organism:
 
     def age(self):
         self.health -= 1
+
+    def nourish(self):
+        self.health += self.REWARD_FOR_EATING
