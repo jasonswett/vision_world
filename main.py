@@ -7,7 +7,7 @@ from organism import Organism
 from generation import Generation
 
 SCREEN_WIDTH_IN_CELLS = 140
-FOOD_COUNT = 1000
+FOOD_COUNT = 100
 REPRODUCTION_THRESHOLD = 10
 SLOWDOWN_DELAY = 0.03
 
@@ -35,7 +35,7 @@ def main():
                 organism.nourish()
                 food_cells.remove(food_cell)
 
-        reap(organisms)
+            reap(organisms)
 
         if len(organisms) <= REPRODUCTION_THRESHOLD:
             healthiest_organisms = organisms_ordered_by_health(organisms)[:4]
