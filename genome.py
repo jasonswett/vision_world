@@ -2,7 +2,8 @@ import random, hashlib
 from cell_search import CellSearch
 
 class Genome:
-    DIRECTIONS = ["up", "down", "left", "right"] + (["same"] * 4)
+    BIAS_FOR_SAME_DIRECTION = 4
+    DIRECTIONS = ["up", "down", "left", "right"] + (["same"] * BIAS_FOR_SAME_DIRECTION)
     PERCENTAGE_OF_GENES_TO_MUTATE = 0.01
 
     def __init__(self):
