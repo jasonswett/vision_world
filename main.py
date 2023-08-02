@@ -1,4 +1,4 @@
-import pygame, random, time
+import pygame, random, math, time
 
 from move import Move
 from cell_screen import CellScreen
@@ -7,16 +7,15 @@ from organism import Organism
 from generation import Generation
 
 SCREEN_WIDTH_IN_CELLS = 140
-FOOD_COUNT = 100
-REPRODUCTION_THRESHOLD = 10
-SLOWDOWN_DELAY = 0.03
+REPRODUCTION_THRESHOLD = 4
+SLOWDOWN_DELAY = 0.01
 
 def main():
     SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
     pygame.init()
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
-    food_cells = random_food_cells(cell_screen, FOOD_COUNT)
+    food_cells = random_food_cells(cell_screen)
     organisms = Generation([], cell_screen).offspring()
     clock = pygame.time.Clock()
     font = pygame.font.Font(None, 36)
@@ -45,11 +44,9 @@ def main():
             average_improvement = sum(improvements) / 4
             print(f"average improvement of healthiest four: {average_improvement}")
             organisms.extend(Generation(healthiest_organisms, cell_screen).offspring())
-            food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT - len(food_cells)))
+            food_cells.clear()  # Clear the current food cells
+            food_cells.extend(random_food_cells(cell_screen))  # Redraw new food cells
             generation_game_loop_counter += 1
-
-        if len(food_cells) <= 0:
-            food_cells.extend(random_food_cells(cell_screen, FOOD_COUNT))
 
         cell_screen.clear()
 
@@ -72,13 +69,18 @@ def improvement(organism):
 def organisms_ordered_by_health(organisms):
     return sorted(organisms, key=lambda organism: organism.health, reverse=True)
 
-def random_food_cells(cell_screen, num_cells):
+def random_food_cells(cell_screen, square_size=32):
     cells = []
-    for _ in range(num_cells):
-        x = cell_screen.random_x()
-        y = cell_screen.random_y()
-        cell = Cell(x, y, (0, 127, 0))
-        cells.append(cell)
+
+    top_left_x = (cell_screen.width - square_size) // 2
+    top_left_y = (cell_screen.height - square_size) // 2
+    bottom_right_x = top_left_x + square_size
+    bottom_right_y = top_left_y + square_size
+
+    for x in range(top_left_x, bottom_right_x):
+        for y in range(top_left_y, bottom_right_y):
+            cells.append(Cell(x, y, (0, 127, 0)))
+
     return cells
 
 def reap(organisms):

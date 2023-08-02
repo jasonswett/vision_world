@@ -11,7 +11,7 @@ class Generation:
     def offspring(self):
         organisms = []
         for _ in range(GENERATION_SIZE):
-            x = random.randint(self.cell_screen.width//2, 3*self.cell_screen.width//4)  # Adjust the x-coordinate within the 50%-75% range
+            x = self.cell_screen.random_x()
             y = self.cell_screen.random_y()
             organism = Organism(x, y, self.random_parent_organism_genome())
             organisms.append(organism)
