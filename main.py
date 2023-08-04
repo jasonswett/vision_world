@@ -18,7 +18,6 @@ def main():
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
     ecosystem = Ecosystem(cell_screen)
-    organisms = Generation([], cell_screen).offspring()
     clock = pygame.time.Clock()
     font = pygame.font.Font(None, 36)
 
@@ -28,16 +27,16 @@ def main():
     while True:
         time.sleep(SLOWDOWN_DELAY)
 
-        for organism in organisms:
+        for organism in ecosystem.organisms:
             organism.move((cell_screen.width, cell_screen.height), ecosystem.food_cells)
             ecosystem.offer_food_to(organism)
-            ecosystem.kill_unhealthy_organisms(organisms)
+            ecosystem.kill_unhealthy_organisms(ecosystem.organisms)
 
-        if is_population_at_reproduction_threshold(organisms):
-            healthiest_organisms = organisms_ordered_by_health(organisms)[:NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE]
-            organisms.extend(Generation(healthiest_organisms, cell_screen).offspring())
-            ecosystem.food_cells.clear()  # Clear the current food cells
-            ecosystem.food_cells.extend(ecosystem.starting_food_cells())  # Redraw new food cells
+        if is_population_at_reproduction_threshold(ecosystem.organisms):
+            healthiest_organisms = organisms_ordered_by_health(ecosystem.organisms)[:NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE]
+            ecosystem.organisms.extend(Generation(healthiest_organisms, cell_screen).offspring())
+            ecosystem.food_cells.clear()
+            ecosystem.food_cells.extend(ecosystem.starting_food_cells())
             generation_game_loop_counter += 1
 
         cell_screen.clear()
@@ -45,7 +44,7 @@ def main():
         for cell in ecosystem.food_cells:
             cell_screen.draw_cell(cell)
 
-        for organism in organisms:
+        for organism in ecosystem.organisms:
             cell_screen.draw_organism(organism)
 
         draw_generation_count(cell_screen.surface, font, generation_game_loop_counter)

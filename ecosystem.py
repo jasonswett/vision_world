@@ -1,9 +1,11 @@
 from cell import Cell
+from generation import Generation
 
 class Ecosystem:
     def __init__(self, cell_screen):
         self.cell_screen = cell_screen
         self.food_cells = self.starting_food_cells()
+        self.organisms = Generation([], self.cell_screen).offspring()
 
     def eatable_food_cell(self, organism):
         for cell in organism.cells:
