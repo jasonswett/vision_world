@@ -8,7 +8,7 @@ from generation import Generation
 from ecosystem import Ecosystem
 
 SCREEN_WIDTH_IN_CELLS = 140
-REPRODUCTION_THRESHOLD = 4
+REPRODUCTION_THRESHOLD = 15
 SLOWDOWN_DELAY = 0.01
 
 def main():
@@ -32,13 +32,10 @@ def main():
             ecosystem.offer_food_to(organism)
             ecosystem.kill_unhealthy_organisms(organisms)
 
-        if len(organisms) <= REPRODUCTION_THRESHOLD:
+        if is_population_at_reproduction_threshold(organisms):
             healthiest_organisms = organisms_ordered_by_health(organisms)[:4]
             improvements = [improvement(organism) for organism in healthiest_organisms]
-            print("-------------------------------------")
-            print(f"healthiest four: {improvements}")
             average_improvement = sum(improvements) / 4
-            print(f"average improvement of healthiest four: {average_improvement}")
             organisms.extend(Generation(healthiest_organisms, cell_screen).offspring())
             ecosystem.food_cells.clear()  # Clear the current food cells
             ecosystem.food_cells.extend(ecosystem.starting_food_cells())  # Redraw new food cells
@@ -70,5 +67,8 @@ def draw_generation_count(screen, font, generation_game_loop_counter):
     text_rect = text.get_rect()
     text_rect.bottomright = screen.get_rect().bottomright
     screen.blit(text, text_rect)
+
+def is_population_at_reproduction_threshold(organisms):
+    return len(organisms) <= REPRODUCTION_THRESHOLD
 
 main()
