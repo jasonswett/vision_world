@@ -16,15 +16,14 @@ def main():
     pygame.init()
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
-    food_cells = random_food_cells(cell_screen)
+    ecosystem = Ecosystem()
+    food_cells = ecosystem.random_food_cells(cell_screen)
     organisms = Generation([], cell_screen).offspring()
     clock = pygame.time.Clock()
     font = pygame.font.Font(None, 36)
 
     generation_game_loop_counter = 1
     pygame.event.get()
-
-    ecosystem = Ecosystem()
 
     while True:
         time.sleep(SLOWDOWN_DELAY)
@@ -48,7 +47,7 @@ def main():
             print(f"average improvement of healthiest four: {average_improvement}")
             organisms.extend(Generation(healthiest_organisms, cell_screen).offspring())
             food_cells.clear()  # Clear the current food cells
-            food_cells.extend(random_food_cells(cell_screen))  # Redraw new food cells
+            food_cells.extend(ecosystem.random_food_cells(cell_screen))  # Redraw new food cells
             generation_game_loop_counter += 1
 
         cell_screen.clear()
@@ -71,20 +70,6 @@ def improvement(organism):
 
 def organisms_ordered_by_health(organisms):
     return sorted(organisms, key=lambda organism: organism.health, reverse=True)
-
-def random_food_cells(cell_screen, square_size=32):
-    cells = []
-
-    top_left_x = (cell_screen.width - square_size) // 2
-    top_left_y = (cell_screen.height - square_size) // 2
-    bottom_right_x = top_left_x + square_size
-    bottom_right_y = top_left_y + square_size
-
-    for x in range(top_left_x, bottom_right_x):
-        for y in range(top_left_y, bottom_right_y):
-            cells.append(Cell(x, y, (0, 127, 0)))
-
-    return cells
 
 def reap(organisms):
     for organism in organisms.copy():
