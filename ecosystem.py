@@ -1,6 +1,9 @@
 from cell import Cell
 
 class Ecosystem:
+    def __init__(self, cell_screen):
+        self.food_cells = self.starting_food_cells(cell_screen)
+
     def eatable_food_cell(self, organism, food_cells):
         for cell in organism.cells:
             for food_cell in food_cells:

@@ -16,8 +16,7 @@ def main():
     pygame.init()
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
 
-    ecosystem = Ecosystem()
-    food_cells = ecosystem.starting_food_cells(cell_screen)
+    ecosystem = Ecosystem(cell_screen)
     organisms = Generation([], cell_screen).offspring()
     clock = pygame.time.Clock()
     font = pygame.font.Font(None, 36)
@@ -29,12 +28,12 @@ def main():
         time.sleep(SLOWDOWN_DELAY)
 
         for organism in organisms:
-            organism.move(cell_screen.width, cell_screen.height, food_cells)
+            organism.move(cell_screen.width, cell_screen.height, ecosystem.food_cells)
 
-            food_cell = ecosystem.eatable_food_cell(organism, food_cells)
+            food_cell = ecosystem.eatable_food_cell(organism, ecosystem.food_cells)
             if food_cell:
                 organism.nourish()
-                food_cells.remove(food_cell)
+                ecosystem.food_cells.remove(food_cell)
 
             reap(organisms)
 
@@ -46,13 +45,13 @@ def main():
             average_improvement = sum(improvements) / 4
             print(f"average improvement of healthiest four: {average_improvement}")
             organisms.extend(Generation(healthiest_organisms, cell_screen).offspring())
-            food_cells.clear()  # Clear the current food cells
-            food_cells.extend(ecosystem.starting_food_cells(cell_screen))  # Redraw new food cells
+            ecosystem.food_cells.clear()  # Clear the current food cells
+            ecosystem.food_cells.extend(ecosystem.starting_food_cells(cell_screen))  # Redraw new food cells
             generation_game_loop_counter += 1
 
         cell_screen.clear()
 
-        for cell in food_cells:
+        for cell in ecosystem.food_cells:
             cell_screen.draw_cell(cell)
 
         for organism in organisms:
