@@ -2,7 +2,8 @@ from cell import Cell
 
 class Ecosystem:
     def __init__(self, cell_screen):
-        self.food_cells = self.starting_food_cells(cell_screen)
+        self.cell_screen = cell_screen
+        self.food_cells = self.starting_food_cells()
 
     def eatable_food_cell(self, organism, food_cells):
         for cell in organism.cells:
@@ -11,11 +12,11 @@ class Ecosystem:
                     return food_cell
         return None
 
-    def starting_food_cells(self, cell_screen, square_size=32):
+    def starting_food_cells(self, square_size=32):
         cells = []
 
-        top_left_x = (cell_screen.width - square_size) // 2
-        top_left_y = (cell_screen.height - square_size) // 2
+        top_left_x = (self.cell_screen.width - square_size) // 2
+        top_left_y = (self.cell_screen.height - square_size) // 2
         bottom_right_x = top_left_x + square_size
         bottom_right_y = top_left_y + square_size
 

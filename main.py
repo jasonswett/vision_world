@@ -46,7 +46,7 @@ def main():
             print(f"average improvement of healthiest four: {average_improvement}")
             organisms.extend(Generation(healthiest_organisms, cell_screen).offspring())
             ecosystem.food_cells.clear()  # Clear the current food cells
-            ecosystem.food_cells.extend(ecosystem.starting_food_cells(cell_screen))  # Redraw new food cells
+            ecosystem.food_cells.extend(ecosystem.starting_food_cells())  # Redraw new food cells
             generation_game_loop_counter += 1
 
         cell_screen.clear()
