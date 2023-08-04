@@ -5,6 +5,7 @@ from cell_screen import CellScreen
 from cell import Cell
 from organism import Organism
 from generation import Generation
+from ecosystem import Ecosystem
 
 SCREEN_WIDTH_IN_CELLS = 140
 REPRODUCTION_THRESHOLD = 4
@@ -23,13 +24,15 @@ def main():
     generation_game_loop_counter = 1
     pygame.event.get()
 
+    ecosystem = Ecosystem()
+
     while True:
         time.sleep(SLOWDOWN_DELAY)
 
         for organism in organisms:
             organism.move(cell_screen.width, cell_screen.height, food_cells)
 
-            food_cell = eatable_food_cell(organism, food_cells)
+            food_cell = ecosystem.eatable_food_cell(organism, food_cells)
             if food_cell:
                 organism.nourish()
                 food_cells.remove(food_cell)
@@ -93,12 +96,5 @@ def draw_generation_count(screen, font, generation_game_loop_counter):
     text_rect = text.get_rect()
     text_rect.bottomright = screen.get_rect().bottomright
     screen.blit(text, text_rect)
-
-def eatable_food_cell(organism, food_cells):
-    for cell in organism.cells:
-        for food_cell in food_cells:
-            if food_cell.x == cell.x and food_cell.y == cell.y:
-                return food_cell
-    return None
 
 main()
