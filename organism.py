@@ -6,6 +6,7 @@ from move import Move
 class Organism:
     MUTATION_RATE = 0.01
     STARTING_HEALTH = 50
+    MAX_HEALTH = 50
     REWARD_FOR_EATING = 10
 
     def __init__(self, x, y, genome=None):
@@ -35,8 +36,6 @@ class Organism:
             self.last_direction = direction
         return coordinates
 
-    def age(self):
-        self.health -= 1
-
     def nourish(self):
-        self.health += self.REWARD_FOR_EATING
+        potential_health = self.health + self.REWARD_FOR_EATING
+        self.health = min(potential_health, self.MAX_HEALTH)
