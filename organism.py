@@ -17,6 +17,7 @@ class Organism:
         else:
             self.genome = Genome()
 
+        self.nourishments = 0
         self.health = self.STARTING_HEALTH
         self.eye_cell = EyeCell(x, y, self.genome.color())
         self.cells = [self.eye_cell]
@@ -38,3 +39,4 @@ class Organism:
     def nourish(self):
         potential_health = self.health + self.REWARD_FOR_EATING
         self.health = min(potential_health, self.MAX_HEALTH)
+        self.nourishments += 1

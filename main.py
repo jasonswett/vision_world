@@ -8,7 +8,7 @@ from generation import Generation
 from ecosystem import Ecosystem
 
 SCREEN_WIDTH_IN_CELLS = 140
-REPRODUCTION_THRESHOLD = 4
+REPRODUCTION_THRESHOLD = 10
 NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 4
 SLOWDOWN_DELAY = 0.01
 
@@ -59,7 +59,7 @@ def improvement(organism):
     return (organism.health - Organism.STARTING_HEALTH)/Organism.REWARD_FOR_EATING
 
 def organisms_ordered_by_health(organisms):
-    return sorted(organisms, key=lambda organism: organism.health, reverse=True)
+    return sorted(organisms, key=lambda organism: organism.nourishments, reverse=True)
 
 def draw_generation_count(screen, font, generation_game_loop_counter):
     text = font.render(f'Generation: {generation_game_loop_counter}', True, (255, 255, 255), (0, 0, 0))
