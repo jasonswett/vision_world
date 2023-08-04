@@ -7,7 +7,7 @@ class Organism:
     MUTATION_RATE = 0.01
     STARTING_HEALTH = 50
     MAX_HEALTH = 50
-    REWARD_FOR_EATING = 10
+    REWARD_FOR_EATING = 3
 
     def __init__(self, x, y, genome=None):
         if genome:
@@ -15,7 +15,6 @@ class Organism:
             if random.random() < self.MUTATION_RATE:
                 self.genome.mutate()
         else:
-            print("making fresh genome")
             self.genome = Genome()
 
         self.health = self.STARTING_HEALTH
