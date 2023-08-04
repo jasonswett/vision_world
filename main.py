@@ -30,7 +30,7 @@ def main():
         for organism in organisms:
             organism.move(cell_screen.width, cell_screen.height, ecosystem.food_cells)
 
-            food_cell = ecosystem.eatable_food_cell(organism, ecosystem.food_cells)
+            food_cell = ecosystem.eatable_food_cell(organism)
             if food_cell:
                 organism.nourish()
                 ecosystem.food_cells.remove(food_cell)

@@ -5,9 +5,9 @@ class Ecosystem:
         self.cell_screen = cell_screen
         self.food_cells = self.starting_food_cells()
 
-    def eatable_food_cell(self, organism, food_cells):
+    def eatable_food_cell(self, organism):
         for cell in organism.cells:
-            for food_cell in food_cells:
+            for food_cell in self.food_cells:
                 if food_cell.x == cell.x and food_cell.y == cell.y:
                     return food_cell
         return None
