@@ -25,3 +25,9 @@ class Ecosystem:
                 cells.append(Cell(x, y, (0, 127, 0)))
 
         return cells
+
+    def offer_food_to(self, organism):
+        food_cell = self.eatable_food_cell(organism)
+        if food_cell:
+            organism.nourish()
+            self.food_cells.remove(food_cell)
