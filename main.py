@@ -9,6 +9,7 @@ from ecosystem import Ecosystem
 
 SCREEN_WIDTH_IN_CELLS = 140
 REPRODUCTION_THRESHOLD = 15
+NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 4
 SLOWDOWN_DELAY = 0.01
 
 def main():
@@ -33,7 +34,7 @@ def main():
             ecosystem.kill_unhealthy_organisms(organisms)
 
         if is_population_at_reproduction_threshold(organisms):
-            healthiest_organisms = organisms_ordered_by_health(organisms)[:4]
+            healthiest_organisms = organisms_ordered_by_health(organisms)[:NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE]
             improvements = [improvement(organism) for organism in healthiest_organisms]
             average_improvement = sum(improvements) / 4
             organisms.extend(Generation(healthiest_organisms, cell_screen).offspring())
