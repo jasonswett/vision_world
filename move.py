@@ -6,10 +6,9 @@ TUPLES = {
 }
 
 class Move:
-    def __init__(self, starting_coordinates, bounds_width, bounds_height):
+    def __init__(self, starting_coordinates, bounds):
         self.starting_coordinates = starting_coordinates
-        self.bounds_width = bounds_width
-        self.bounds_height = bounds_height
+        self.bounds_width, self.bounds_height = bounds
 
     def coordinates(self, direction):
         delta = TUPLES[direction]

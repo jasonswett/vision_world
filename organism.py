@@ -22,13 +22,13 @@ class Organism:
         self.cells = [self.eye_cell]
         self.last_direction = None
 
-    def move(self, bounds_width, bounds_height, food_cells):
+    def move(self, bounds, food_cells):
         self.health -= 1
         digest = self.eye_cell.digest(food_cells)
         for cell in self.cells:
             cell.color = self.genome.color()
         for cell in self.cells:
-            move = Move(cell.coordinates(), bounds_width, bounds_height)
+            move = Move(cell.coordinates(), bounds)
             direction = self.genome.direction(digest)
             coordinates = move.coordinates(direction)
             cell.move_to(coordinates)

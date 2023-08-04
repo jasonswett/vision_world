@@ -28,7 +28,7 @@ def main():
         time.sleep(SLOWDOWN_DELAY)
 
         for organism in organisms:
-            organism.move(cell_screen.width, cell_screen.height, ecosystem.food_cells)
+            organism.move((cell_screen.width, cell_screen.height), ecosystem.food_cells)
             ecosystem.offer_food_to(organism)
             ecosystem.kill_unhealthy_organisms(organisms)
 
