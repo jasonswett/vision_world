@@ -34,7 +34,6 @@ class Genome:
         if not self.rules:
             return
 
-        print("mutating")
         number_of_genes_to_mutate = int(len(self.rules.keys()) * self.PERCENTAGE_OF_GENES_TO_MUTATE)
         keys_to_mutate = random.sample(list(self.rules.keys()), number_of_genes_to_mutate)
         
