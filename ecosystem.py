@@ -31,3 +31,8 @@ class Ecosystem:
         if food_cell:
             organism.nourish()
             self.food_cells.remove(food_cell)
+
+    def kill_unhealthy_organisms(self, organisms):
+        for organism in organisms.copy():
+            if organism.health == 0:
+                organisms.remove(organism)

@@ -30,7 +30,7 @@ def main():
         for organism in organisms:
             organism.move(cell_screen.width, cell_screen.height, ecosystem.food_cells)
             ecosystem.offer_food_to(organism)
-            reap(organisms)
+            ecosystem.kill_unhealthy_organisms(organisms)
 
         if len(organisms) <= REPRODUCTION_THRESHOLD:
             healthiest_organisms = organisms_ordered_by_health(organisms)[:4]
@@ -64,11 +64,6 @@ def improvement(organism):
 
 def organisms_ordered_by_health(organisms):
     return sorted(organisms, key=lambda organism: organism.health, reverse=True)
-
-def reap(organisms):
-    for organism in organisms.copy():
-        if organism.health == 0:
-            organisms.remove(organism)
 
 def draw_generation_count(screen, font, generation_game_loop_counter):
     text = font.render(f'Generation: {generation_game_loop_counter}', True, (255, 255, 255), (0, 0, 0))
