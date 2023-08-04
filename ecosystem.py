@@ -8,7 +8,7 @@ class Ecosystem:
                     return food_cell
         return None
 
-    def random_food_cells(self, cell_screen, square_size=32):
+    def starting_food_cells(self, cell_screen, square_size=32):
         cells = []
 
         top_left_x = (cell_screen.width - square_size) // 2
