@@ -21,7 +21,7 @@ def main():
     ecosystem = Ecosystem(cell_screen)
     clock = pygame.time.Clock()
 
-    generation_game_loop_counter = 1
+    generation_count = 1
     pygame.event.get()
 
     while True:
@@ -35,7 +35,7 @@ def main():
         if ecosystem.is_population_at_reproduction_threshold():
             ecosystem.organisms = Generation(ecosystem.healthiest_organisms(), cell_screen).offspring()
             ecosystem.food_cells = ecosystem.starting_food_cells()
-            generation_game_loop_counter += 1
+            generation_count += 1
 
         cell_screen.clear()
 
@@ -45,7 +45,7 @@ def main():
         for organism in ecosystem.organisms:
             renderer.draw_organism(organism)
 
-        renderer.draw_generation_count(generation_game_loop_counter)
+        renderer.draw_generation_count(generation_count)
 
         pygame.display.update()
         clock.tick(FRAME_RATE)
