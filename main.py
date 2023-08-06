@@ -51,9 +51,6 @@ def main():
 
     pygame.quit()
 
-def improvement(organism):
-    return (organism.health - Organism.STARTING_HEALTH)/Organism.REWARD_FOR_EATING
-
 def draw_generation_count(screen, font, generation_game_loop_counter):
     text = font.render(f'Generation: {generation_game_loop_counter}', True, (255, 255, 255), (0, 0, 0))
     text_rect = text.get_rect()
