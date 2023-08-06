@@ -6,6 +6,7 @@ from cell import Cell
 from organism import Organism
 from generation import Generation
 from ecosystem import Ecosystem
+from generation_count import GenerationCount
 
 SCREEN_WIDTH_IN_CELLS = 140
 SLOWDOWN_DELAY = 0.01
@@ -44,17 +45,11 @@ def main():
         for organism in ecosystem.organisms:
             cell_screen.draw_organism(organism)
 
-        draw_generation_count(cell_screen.surface, font, generation_game_loop_counter)
+        GenerationCount(cell_screen.surface, font, generation_game_loop_counter).draw()
 
         pygame.display.update()
         clock.tick(FRAME_RATE)
 
     pygame.quit()
-
-def draw_generation_count(screen, font, generation_game_loop_counter):
-    text = font.render(f'Generation: {generation_game_loop_counter}', True, (255, 255, 255), (0, 0, 0))
-    text_rect = text.get_rect()
-    text_rect.bottomright = screen.get_rect().bottomright
-    screen.blit(text, text_rect)
 
 main()
