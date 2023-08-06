@@ -10,6 +10,7 @@ from ecosystem import Ecosystem
 SCREEN_WIDTH_IN_CELLS = 140
 REPRODUCTION_THRESHOLD = 4
 SLOWDOWN_DELAY = 0.01
+FRAME_RATE = 60
 
 def main():
     SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
@@ -47,7 +48,7 @@ def main():
         draw_generation_count(cell_screen.surface, font, generation_game_loop_counter)
 
         pygame.display.update()
-        clock.tick(60)
+        clock.tick(FRAME_RATE)
 
     pygame.quit()
 
