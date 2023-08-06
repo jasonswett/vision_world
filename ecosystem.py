@@ -3,6 +3,7 @@ from generation import Generation
 
 class Ecosystem:
     NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 4
+    REPRODUCTION_THRESHOLD = 4
 
     def __init__(self, cell_screen):
         self.cell_screen = cell_screen
@@ -46,3 +47,6 @@ class Ecosystem:
 
     def healthiest_organisms(self):
         return self.organisms_ordered_by_health()[:self.NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE]
+
+    def is_population_at_reproduction_threshold(self):
+        return len(self.organisms) <= self.REPRODUCTION_THRESHOLD

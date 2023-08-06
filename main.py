@@ -8,7 +8,6 @@ from generation import Generation
 from ecosystem import Ecosystem
 
 SCREEN_WIDTH_IN_CELLS = 140
-REPRODUCTION_THRESHOLD = 4
 SLOWDOWN_DELAY = 0.01
 FRAME_RATE = 60
 
@@ -32,7 +31,7 @@ def main():
             ecosystem.offer_food_to(organism)
             ecosystem.kill_unhealthy_organisms(ecosystem.organisms)
 
-        if is_population_at_reproduction_threshold(ecosystem.organisms):
+        if ecosystem.is_population_at_reproduction_threshold():
             ecosystem.organisms = Generation(ecosystem.healthiest_organisms(), cell_screen).offspring()
             ecosystem.food_cells = ecosystem.starting_food_cells()
             generation_game_loop_counter += 1
@@ -60,8 +59,5 @@ def draw_generation_count(screen, font, generation_game_loop_counter):
     text_rect = text.get_rect()
     text_rect.bottomright = screen.get_rect().bottomright
     screen.blit(text, text_rect)
-
-def is_population_at_reproduction_threshold(organisms):
-    return len(organisms) <= REPRODUCTION_THRESHOLD
 
 main()
