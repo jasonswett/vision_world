@@ -35,8 +35,7 @@ def main():
         if is_population_at_reproduction_threshold(ecosystem.organisms):
             healthiest_organisms = organisms_ordered_by_health(ecosystem.organisms)[:NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE]
             ecosystem.organisms = Generation(healthiest_organisms, cell_screen).offspring()
-            ecosystem.food_cells.clear()
-            ecosystem.food_cells.extend(ecosystem.starting_food_cells())
+            ecosystem.food_cells = ecosystem.starting_food_cells()
             generation_game_loop_counter += 1
 
         cell_screen.clear()
