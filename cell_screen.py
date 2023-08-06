@@ -1,9 +1,9 @@
 import pygame, random
 
-INNER_CELL_WIDTH = 6
-CELL_WIDTH = INNER_CELL_WIDTH + 2
-
 class CellScreen:
+    INNER_CELL_WIDTH = 6
+    CELL_WIDTH = INNER_CELL_WIDTH + 2
+
     def __init__(self, width, height):
         self.organisms = []
         self.width = width
@@ -11,22 +11,13 @@ class CellScreen:
         self.surface = pygame.display.set_mode((self.width_in_pixels(), self.height_in_pixels()), 0, 32)
 
     def width_in_pixels(self):
-        return CELL_WIDTH * self.width
+        return self.CELL_WIDTH * self.width
 
     def height_in_pixels(self):
-        return CELL_WIDTH * self.height
+        return self.CELL_WIDTH * self.height
 
     def clear(self):
         self.surface.fill((0, 0, 0))
-
-    def draw_organism(self, organism):
-        for cell in organism.cells:
-            self.draw_cell(cell)
-
-    def draw_cell(self, cell):
-        x_position = cell.x * CELL_WIDTH
-        y_position = cell.y * CELL_WIDTH
-        pygame.draw.rect(self.surface, cell.color, (x_position, y_position, INNER_CELL_WIDTH, INNER_CELL_WIDTH), 0)
 
     def random_x(self):
         return random.randint(0, self.width - 1)

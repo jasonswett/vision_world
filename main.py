@@ -7,6 +7,7 @@ from organism import Organism
 from generation import Generation
 from ecosystem import Ecosystem
 from generation_count import GenerationCount
+from renderer import Renderer
 
 SCREEN_WIDTH_IN_CELLS = 140
 SLOWDOWN_DELAY = 0.01
@@ -16,6 +17,7 @@ def main():
     SCREEN_HEIGHT_IN_CELLS = int(SCREEN_WIDTH_IN_CELLS * 0.618)
     pygame.init()
     cell_screen = CellScreen(SCREEN_WIDTH_IN_CELLS, SCREEN_HEIGHT_IN_CELLS)
+    renderer = Renderer(cell_screen)
 
     ecosystem = Ecosystem(cell_screen)
     clock = pygame.time.Clock()
@@ -39,10 +41,10 @@ def main():
         cell_screen.clear()
 
         for cell in ecosystem.food_cells:
-            cell_screen.draw_cell(cell)
+            renderer.draw_cell(cell)
 
         for organism in ecosystem.organisms:
-            cell_screen.draw_organism(organism)
+            renderer.draw_organism(organism)
 
         GenerationCount(cell_screen.surface, generation_game_loop_counter).draw()
 

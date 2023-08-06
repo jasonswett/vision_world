@@ -1,0 +1,14 @@
+import pygame
+
+class Renderer:
+    def __init__(self, cell_screen):
+        self.cell_screen = cell_screen
+
+    def draw_organism(self, organism):
+        for cell in organism.cells:
+            self.draw_cell(cell)
+
+    def draw_cell(self, cell):
+        x_position = cell.x * self.cell_screen.CELL_WIDTH
+        y_position = cell.y * self.cell_screen.CELL_WIDTH
+        pygame.draw.rect(self.cell_screen.surface, cell.color, (x_position, y_position, self.cell_screen.INNER_CELL_WIDTH, self.cell_screen.INNER_CELL_WIDTH), 0)
