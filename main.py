@@ -6,7 +6,6 @@ from cell import Cell
 from organism import Organism
 from generation import Generation
 from ecosystem import Ecosystem
-from generation_count import GenerationCount
 from renderer import Renderer
 
 SCREEN_WIDTH_IN_CELLS = 140
@@ -46,7 +45,7 @@ def main():
         for organism in ecosystem.organisms:
             renderer.draw_organism(organism)
 
-        GenerationCount(cell_screen.surface, generation_game_loop_counter).draw()
+        renderer.draw_generation_count(generation_game_loop_counter)
 
         pygame.display.update()
         clock.tick(FRAME_RATE)
