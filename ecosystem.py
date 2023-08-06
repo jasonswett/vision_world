@@ -14,13 +14,17 @@ class Ecosystem:
                     return food_cell
         return None
 
-    def starting_food_cells(self, number_of_cells=400):
+    def starting_food_cells(self, square_size=32):
         cells = []
 
-        for _ in range(number_of_cells):
-            x = self.cell_screen.random_x()
-            y = self.cell_screen.random_y()
-            cells.append(Cell(x, y, (0, 127, 0)))
+        top_left_x = (self.cell_screen.width - square_size) // 2
+        top_left_y = (self.cell_screen.height - square_size) // 2
+        bottom_right_x = top_left_x + square_size
+        bottom_right_y = top_left_y + square_size
+
+        for x in range(top_left_x, bottom_right_x):
+            for y in range(top_left_y, bottom_right_y):
+                cells.append(Cell(x, y, (0, 127, 0)))
 
         return cells
 
