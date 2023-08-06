@@ -19,7 +19,6 @@ def main():
 
     ecosystem = Ecosystem(cell_screen)
     clock = pygame.time.Clock()
-    font = pygame.font.Font(None, 36)
 
     generation_game_loop_counter = 1
     pygame.event.get()
@@ -45,7 +44,7 @@ def main():
         for organism in ecosystem.organisms:
             cell_screen.draw_organism(organism)
 
-        GenerationCount(cell_screen.surface, font, generation_game_loop_counter).draw()
+        GenerationCount(cell_screen.surface, generation_game_loop_counter).draw()
 
         pygame.display.update()
         clock.tick(FRAME_RATE)
