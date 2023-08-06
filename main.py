@@ -9,7 +9,6 @@ from ecosystem import Ecosystem
 
 SCREEN_WIDTH_IN_CELLS = 140
 REPRODUCTION_THRESHOLD = 4
-NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 4
 SLOWDOWN_DELAY = 0.01
 
 def main():
@@ -33,8 +32,7 @@ def main():
             ecosystem.kill_unhealthy_organisms(ecosystem.organisms)
 
         if is_population_at_reproduction_threshold(ecosystem.organisms):
-            healthiest_organisms = ecosystem.organisms_ordered_by_health()[:NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE]
-            ecosystem.organisms = Generation(healthiest_organisms, cell_screen).offspring()
+            ecosystem.organisms = Generation(ecosystem.healthiest_organisms(), cell_screen).offspring()
             ecosystem.food_cells = ecosystem.starting_food_cells()
             generation_game_loop_counter += 1
 

@@ -2,6 +2,8 @@ from cell import Cell
 from generation import Generation
 
 class Ecosystem:
+    NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 4
+
     def __init__(self, cell_screen):
         self.cell_screen = cell_screen
         self.food_cells = self.starting_food_cells()
@@ -41,3 +43,6 @@ class Ecosystem:
 
     def organisms_ordered_by_health(self):
         return sorted(self.organisms, key=lambda organism: organism.health, reverse=True)
+
+    def healthiest_organisms(self):
+        return self.organisms_ordered_by_health()[:self.NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE]
