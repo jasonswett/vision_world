@@ -33,7 +33,7 @@ def main():
             ecosystem.kill_unhealthy_organisms(ecosystem.organisms)
 
         if is_population_at_reproduction_threshold(ecosystem.organisms):
-            healthiest_organisms = organisms_ordered_by_health(ecosystem.organisms)[:NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE]
+            healthiest_organisms = ecosystem.organisms_ordered_by_health(ecosystem.organisms)[:NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE]
             ecosystem.organisms = Generation(healthiest_organisms, cell_screen).offspring()
             ecosystem.food_cells = ecosystem.starting_food_cells()
             generation_game_loop_counter += 1
@@ -55,9 +55,6 @@ def main():
 
 def improvement(organism):
     return (organism.health - Organism.STARTING_HEALTH)/Organism.REWARD_FOR_EATING
-
-def organisms_ordered_by_health(organisms):
-    return sorted(organisms, key=lambda organism: organism.health, reverse=True)
 
 def draw_generation_count(screen, font, generation_game_loop_counter):
     text = font.render(f'Generation: {generation_game_loop_counter}', True, (255, 255, 255), (0, 0, 0))

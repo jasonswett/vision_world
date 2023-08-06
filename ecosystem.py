@@ -38,3 +38,6 @@ class Ecosystem:
         for organism in organisms.copy():
             if organism.health == 0:
                 organisms.remove(organism)
+
+    def organisms_ordered_by_health(self, organisms):
+        return sorted(organisms, key=lambda organism: organism.health, reverse=True)
