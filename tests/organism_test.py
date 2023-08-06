@@ -8,5 +8,5 @@ def test_move():
     food_cells = []
 
     initial_health = organism.health
-    organism.move(bounds_width, bounds_height, food_cells)
+    organism.move((bounds_width, bounds_height), food_cells)
     assert organism.health == initial_health - 1
