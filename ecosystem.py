@@ -39,5 +39,5 @@ class Ecosystem:
             if organism.health == 0:
                 organisms.remove(organism)
 
-    def organisms_ordered_by_health(self, organisms):
-        return sorted(organisms, key=lambda organism: organism.health, reverse=True)
+    def organisms_ordered_by_health(self):
+        return sorted(self.organisms, key=lambda organism: organism.health, reverse=True)
