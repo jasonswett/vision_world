@@ -48,5 +48,8 @@ class Ecosystem:
     def healthiest_organisms(self):
         return self.organisms_ordered_by_health()[:self.NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE]
 
+    def healthiest_organism(self):
+        return self.organisms_ordered_by_health()[0]
+
     def is_population_at_reproduction_threshold(self):
         return len(self.organisms) <= self.REPRODUCTION_THRESHOLD

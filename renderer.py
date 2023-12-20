@@ -15,9 +15,9 @@ class Renderer:
         y_position = cell.y * self.cell_screen.CELL_WIDTH
         pygame.draw.rect(self.cell_screen.surface, cell.color, (x_position, y_position, self.cell_screen.INNER_CELL_WIDTH, self.cell_screen.INNER_CELL_WIDTH), 0)
 
-    def draw_generation_count(self, count):
+    def draw_labels(self, generation_count, max_health):
         font = pygame.font.Font(None, self.GENERATION_COUNT_FONT_SIZE)
-        text = font.render(f'Generation: {count}', True, (255, 255, 255), (0, 0, 0))
+        text = font.render(f'Generation: {generation_count} Healthiest Organism Health: {max_health}', True, (255, 255, 255), (0, 0, 0))
         text_rect = text.get_rect()
         text_rect.bottomright = self.cell_screen.surface.get_rect().bottomright
         self.cell_screen.surface.blit(text, text_rect)
