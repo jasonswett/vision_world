@@ -5,9 +5,9 @@ from move import Move
 
 class Organism:
     MUTATION_RATE = 0.01
-    STARTING_HEALTH = 20
-    MAX_HEALTH = 20
-    REWARD_FOR_EATING = 10
+    STARTING_HEALTH = 30
+    MAX_HEALTH = 1000
+    REWARD_FOR_EATING = 20
 
     def __init__(self, x, y, genome=None):
         if genome:
