@@ -2,8 +2,9 @@ from cell import Cell
 from generation import Generation
 
 class Ecosystem:
-    NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 4
+    NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 1
     REPRODUCTION_THRESHOLD = 4
+    NUMBER_OF_FOOD_CELLS = 100
 
     def __init__(self, cell_screen):
         self.cell_screen = cell_screen
@@ -17,10 +18,10 @@ class Ecosystem:
                     return food_cell
         return None
 
-    def starting_food_cells(self, number_of_cells=400):
+    def starting_food_cells(self):
         cells = []
 
-        for _ in range(number_of_cells):
+        for _ in range(self.NUMBER_OF_FOOD_CELLS):
             x = self.cell_screen.random_x()
             y = self.cell_screen.random_y()
             cells.append(Cell(x, y, (0, 127, 0)))
