@@ -31,9 +31,10 @@ def main():
         for organism in ecosystem.organisms:
             organism.move((cell_screen.width, cell_screen.height), ecosystem.food_cells)
             ecosystem.offer_food_to(organism)
-            ecosystem.kill_unhealthy_organisms(ecosystem.organisms)
 
-        if ecosystem.is_population_at_reproduction_threshold():
+        ecosystem.kill_unhealthy_organisms(ecosystem.organisms)
+
+        if ecosystem.is_population_at_reproduction_threshold() and ecosystem.healthiest_organism().health <= 0:
             max_health_of_last_generation = ecosystem.healthiest_organism().health
             ecosystem.organisms = Generation(ecosystem.healthiest_organisms(), cell_screen).offspring()
             ecosystem.food_cells = ecosystem.starting_food_cells()

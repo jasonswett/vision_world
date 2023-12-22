@@ -36,7 +36,7 @@ class Ecosystem:
 
     def kill_unhealthy_organisms(self, organisms):
         for organism in organisms.copy():
-            if organism.health == 0:
+            if organism.health == 0 and len(organisms) > 1:
                 organisms.remove(organism)
 
     def organisms_ordered_by_health(self):
