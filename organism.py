@@ -18,6 +18,7 @@ class Organism:
             self.genome = Genome()
 
         self.health = self.STARTING_HEALTH
+        self.fitness = 0
         self.eye_cell = EyeCell(x, y, self.genome.color())
         self.cells = [self.eye_cell]
         self.last_direction = None
@@ -38,3 +39,4 @@ class Organism:
     def nourish(self):
         potential_health = self.health + self.REWARD_FOR_EATING
         self.health = min(potential_health, self.MAX_HEALTH)
+        self.fitness += 1
