@@ -8,7 +8,7 @@ from generation import Generation
 from ecosystem import Ecosystem
 from renderer import Renderer
 
-SCREEN_WIDTH_IN_CELLS = 140
+SCREEN_WIDTH_IN_CELLS = 200
 SLOWDOWN_DELAY = 0.01
 FRAME_RATE = 60
 

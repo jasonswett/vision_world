@@ -1,12 +1,16 @@
 import random
 from organism import Organism
 
-GENERATION_SIZE = 10
+GENERATION_SIZE = 20
 
 class Generation:
     def __init__(self, parent_organisms, cell_screen):
         self.parent_organisms = parent_organisms
         self.cell_screen = cell_screen
+
+        print('----')
+        for parent_organism in self.parent_organisms:
+            print(f'parent organism fitness: {parent_organism.fitness}')
 
     def offspring(self):
         organisms = []

@@ -1,7 +1,7 @@
 import pygame, random
 
 class CellScreen:
-    INNER_CELL_WIDTH = 6
+    INNER_CELL_WIDTH = 4
     CELL_WIDTH = INNER_CELL_WIDTH + 2
 
     def __init__(self, width, height):

@@ -4,7 +4,7 @@ from generation import Generation
 class Ecosystem:
     NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 1
     REPRODUCTION_THRESHOLD = 4
-    NUMBER_OF_FOOD_CELLS = 50
+    NUMBER_OF_FOOD_CELLS = 100
 
     def __init__(self, cell_screen):
         self.cell_screen = cell_screen
@@ -36,7 +36,7 @@ class Ecosystem:
 
     def kill_unhealthy_organisms(self, organisms):
         for organism in organisms.copy():
-            if organism.health == 0 and len(organisms) > 1:
+            if organism.health == 0 and len(organisms) > self.REPRODUCTION_THRESHOLD:
                 organisms.remove(organism)
 
     def organisms_ordered_by_health(self):
