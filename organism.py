@@ -5,7 +5,7 @@ from move import Move
 
 class Organism:
     MUTATION_RATE = 0.01
-    STARTING_HEALTH = 30
+    STARTING_HEALTH = 100
     MAX_HEALTH = 1000
     REWARD_FOR_EATING = 20
 
