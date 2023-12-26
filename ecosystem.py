@@ -4,7 +4,7 @@ from generation import Generation
 class Ecosystem:
     NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 4
     REPRODUCTION_THRESHOLD = 10
-    NUMBER_OF_FOOD_CELLS = 400
+    NUMBER_OF_FOOD_CELLS = 600
 
     def __init__(self, cell_screen):
         self.cell_screen = cell_screen

@@ -9,7 +9,7 @@ from ecosystem import Ecosystem
 from renderer import Renderer
 
 SCREEN_WIDTH_IN_CELLS = 300
-SLOWDOWN_DELAY = 0
+SLOWDOWN_DELAY = 0.01
 FRAME_RATE = 60
 
 def main():
@@ -36,8 +36,12 @@ def main():
 
         if ecosystem.is_population_at_reproduction_threshold() and ecosystem.healthiest_organism().health <= 0:
             print('----')
-            print(f'ending food cell count: {len(ecosystem.food_cells)}')
-            print(f'food eaten: {Ecosystem.NUMBER_OF_FOOD_CELLS - len(ecosystem.food_cells)}')
+            initial_food_count = Ecosystem.NUMBER_OF_FOOD_CELLS
+            remaining_food_count = len(ecosystem.food_cells)
+            food_eaten_count = initial_food_count - remaining_food_count
+            percentage_eaten = (food_eaten_count / initial_food_count) * 100
+            print(f'Percentage of food eaten: {percentage_eaten:.2f}')
+
             max_fitness_of_last_generation = ecosystem.healthiest_organism().fitness
             ecosystem.organisms = Generation(ecosystem.healthiest_organisms(), cell_screen).offspring()
             ecosystem.food_cells = ecosystem.starting_food_cells()

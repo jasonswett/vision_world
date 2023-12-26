@@ -1,7 +1,7 @@
 import random
 from organism import Organism
 
-GENERATION_SIZE = 200
+GENERATION_SIZE = 300
 
 class Generation:
     def __init__(self, parent_organisms, cell_screen):
