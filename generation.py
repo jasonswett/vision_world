@@ -8,7 +8,6 @@ class Generation:
         self.parent_organisms = parent_organisms
         self.cell_screen = cell_screen
 
-        print('----')
         for parent_organism in self.parent_organisms:
             print(f'parent organism fitness: {parent_organism.fitness}')
 
