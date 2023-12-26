@@ -2,9 +2,9 @@ from cell import Cell
 from generation import Generation
 
 class Ecosystem:
-    NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 1
-    REPRODUCTION_THRESHOLD = 4
-    NUMBER_OF_FOOD_CELLS = 30
+    NUMBER_OF_ORGANISMS_ALLOWED_TO_REPRODUCE = 4
+    REPRODUCTION_THRESHOLD = 10
+    NUMBER_OF_FOOD_CELLS = 400
 
     def __init__(self, cell_screen):
         self.cell_screen = cell_screen
