@@ -2,11 +2,15 @@ class CellSearch:
     MAX_DISTANCE_TO_LOOK = 100
 
     def __init__(self, food_cells, origin_x, origin_y, x_direction, y_direction):
-        self.food_cells = food_cells
         self.origin_x = origin_x
         self.origin_y = origin_y
         self.x_direction = x_direction
         self.y_direction = y_direction
+        self.food_cells = self._filter_relevant_cells(food_cells)
+
+    def _filter_relevant_cells(self, food_cells):
+        # Keep only cells where either x matches origin_x or y matches origin_y
+        return [cell for cell in food_cells if cell.x == self.origin_x or cell.y == self.origin_y]
 
     def nearest_cell_distance(self):
         x = self.origin_x
